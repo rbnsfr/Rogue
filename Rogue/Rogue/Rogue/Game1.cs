@@ -20,6 +20,8 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet;
+        Sprite protagonist;
+        SpriteFont sf;
 
         public Game1()
         {
@@ -41,6 +43,9 @@ namespace Rogue
             background = Content.Load<Texture2D>(@"Test\Background");
             tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
+
+            sf = Content.Load<SpriteFont>("DrawnString");
+            protagonist = new Sprite(spritesheet, new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Vector2.Zero, new Rectangle(0, 0, 0, 0));
         }
 
         protected override void UnloadContent()
@@ -72,8 +77,12 @@ namespace Rogue
             }*/
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            // <<< START TEST STUFF >>>
+            spriteBatch.DrawString(sf, protagonist.IsAttacking().ToString(), new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.White);
+            spriteBatch.DrawString(sf, protagonist.IsWalking().ToString(), new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.LightGreen);
+            // <<< END TEST STUFF >>>
+            protagonist.Draw(spriteBatch);
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

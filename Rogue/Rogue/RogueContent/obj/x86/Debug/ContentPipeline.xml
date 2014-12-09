@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
+      <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
       <Time>2014-12-09T10:56:14.0606-05:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
+      <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
       <Time>2014-12-09T11:35:18.8774-05:00</Time>
     </Item>
     <Item>
@@ -25,8 +25,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
+      <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
       <Time>2014-12-09T11:42:12.263-05:00</Time>
+    </Item>
+    <Item>
+      <Source>DrawnString.spritefont</Source>
+      <Name>DrawnString</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
+      <Time>2014-12-09T15:33:19.372-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -34,10 +43,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\RogueContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
