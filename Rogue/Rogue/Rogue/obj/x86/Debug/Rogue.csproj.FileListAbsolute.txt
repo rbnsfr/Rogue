@@ -1,0 +1,9 @@
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.exe
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.pdb
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.csprojResolveAssemblyReference.cache
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.exe
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.pdb
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb
+C:\Users\EAHSCS\Documents\Visual Studio 2010\Projects\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb
