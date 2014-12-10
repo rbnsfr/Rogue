@@ -3,39 +3,123 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Rogue
 {
     class Sprite
     {
-        public List<Rectangle> frames = new List<Rectangle>();
-        private Vector2 location;
-        private Vector2 velocity;
-        private Texture2D texture;
-        private Rectangle initialFrame;
-        private bool isDead;
-        private float relativeSize;
-        private Color tintColor;
-        KeyboardState ks;
+        public Texture2D Texture;
 
-        public Sprite(Texture2D texture, Vector2 location, Vector2 velocity, Rectangle initialFrame)
+        protected List<Rectangle> frames = new List<Rectangle>();
+        private int frameWidth = 0;
+        private int frameHeight = 0;
+        private int currentFrame;
+        private float frameTime = 0.1f;
+        private float timeForCurrentFrame = 0.0f;
+
+        private Color tintColor = Color.White;
+        private float rotation = 0.0f;
+        private float relativeSize;
+
+        public int CollisionRadius = 0;
+        public int BoundingXPadding = 0;
+        public int BoundingYPadding = 0;
+
+        public object tag;
+
+        KeyboardState ks = Keyboard.GetState();
+
+        protected Vector2 location = Vector2.Zero;
+        protected Vector2 velocity = Vector2.Zero;
+        protected Vector2 origin = Vector2.Zero;
+
+        public Sprite(
+            Vector2 location,
+            Texture2D texture,
+            Rectangle initialFrame,
+            Vector2 velocity,
+            float relativeSize)
         {
             this.location = location;
-            this.texture = texture;
+            Texture = texture;
             this.velocity = velocity;
-            this.initialFrame = initialFrame;
+            this.relativeSize = relativeSize;
+
+            frames.Add(initialFrame);
+            frameWidth = initialFrame.Width;
+            frameHeight = initialFrame.Height;
+
+            this.origin = new Vector2(frameWidth / 2, frameHeight / 2);
+
+            tag = null;
+
         }
+
+        public bool FlipHorizontal { get; set; }
 
         public Vector2 Location
         {
-            get { return location;}
+            get { return location; }
             set { location = value; }
+        }
+
+        public Vector2 Velocity
+        {
+            get { return velocity; }
+            set { velocity = value; }
+        }
+
+        public Vector2 Origin
+        {
+            get { return origin; }
+            set { origin = value; }
+        }
+
+        public Color TintColor
+        {
+            get { return tintColor; }
+            set { tintColor = value; }
+        }
+
+        public float Rotation
+        {
+            get { return rotation; }
+            set { rotation = value % MathHelper.TwoPi; }
+        }
+
+        public int Frame
+        {
+            get { return currentFrame; }
+            set
+            {
+                currentFrame = (int)MathHelper.Clamp(value, 0,
+                frames.Count - 1);
+            }
+        }
+
+        public float FrameTime
+        {
+            get { return frameTime; }
+            set { frameTime = MathHelper.Max(0, value); }
+        }
+
+        public Rectangle Source
+        {
+            get { return frames[currentFrame]; }
+        }
+
+        public Rectangle Destination
+        {
+            get
+            {
+                return new Rectangle(
+                    (int)location.X,
+                    (int)location.Y,
+                    frameWidth,
+                    frameHeight);
+            }
         }
 
         public bool IsWalking()
@@ -47,48 +131,39 @@ namespace Rogue
                 return false;
         }
 
-        public bool IsAttacking()
+        public Vector2 Center
         {
-            if (ks.IsKeyDown(Keys.Space))
+            get
+            {
+                return location +
+                    new Vector2(frameWidth / 2, frameHeight / 2);
+            }
+        }
+
+        public Rectangle BoundingBoxRect
+        {
+            get
+            {
+                return new Rectangle(
+                    (int)location.X + BoundingXPadding,
+                    (int)location.Y + BoundingYPadding,
+                    frameWidth - (BoundingXPadding * 2),
+                    frameHeight - (BoundingYPadding * 2));
+            }
+        }
+
+        public bool IsBoxColliding(Rectangle OtherBox)
+        {
+            return BoundingBoxRect.Intersects(OtherBox);
+        }
+
+        public bool IsCircleColliding(Vector2 otherCenter, float otherRadius)
+        {
+            if (Vector2.Distance(Center, otherCenter) <
+                (CollisionRadius + otherRadius))
                 return true;
             else
                 return false;
-        }
-
-        public Vector2 Velocity
-        {
-            get { return velocity; }
-            set { velocity = value; }
-        }
-
-        public bool IsDead
-        {
-            get { return isDead; }
-            set { isDead = value; }
-        }
-
-        public float RelativeSize
-        {
-            get { return relativeSize; }
-            set { relativeSize = value; }
-        }
-
-        public Color TintColor
-        {
-            get { return tintColor; }
-            set { tintColor = value; }
-        }
-
-        public Texture2D Texture
-        {
-            get { return texture; }
-            set { texture = value; }
-        }
-
-        public Rectangle InitialFrame
-        {
-            get { return initialFrame; }
-            set { initialFrame = value; }
         }
 
         public void AddFrame(Rectangle frameRectangle)
@@ -96,9 +171,46 @@ namespace Rogue
             frames.Add(frameRectangle);
         }
 
+        public float RelativeSize
+        {
+            get
+            {
+                return relativeSize;
+            }
+            set
+            {
+                relativeSize = value;
+            }
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            timeForCurrentFrame += elapsed;
+
+            if (timeForCurrentFrame >= FrameTime)
+            {
+                currentFrame = (currentFrame + 1) % (frames.Count);
+                timeForCurrentFrame = 0.0f;
+            }
+
+            location += (velocity * elapsed);
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Vector2.Zero, InitialFrame, TintColor);
+            spriteBatch.Draw(
+                Texture,
+                Center,
+                Source,
+                tintColor,
+                rotation,
+                origin,
+                relativeSize,
+                this.FlipHorizontal ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                0.0f);
         }
+
     }
 }

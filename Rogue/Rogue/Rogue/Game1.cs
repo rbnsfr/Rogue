@@ -45,7 +45,8 @@ namespace Rogue
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
 
             sf = Content.Load<SpriteFont>("DrawnString");
-            protagonist = new Sprite(spritesheet, new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Vector2.Zero, new Rectangle(0, 0, 0, 0));
+            protagonist = new Sprite(new Vector2(300, 300), spritesheet,
+                new Rectangle(8, 0, 57, 75), Vector2.Zero, 1.4f);
         }
 
         protected override void UnloadContent()
@@ -54,6 +55,8 @@ namespace Rogue
 
         protected override void Update(GameTime gameTime)
         {
+            if (protagonist.IsWalking())
+                protagonist.Velocity = new Vector2(5, 0);
             base.Update(gameTime);
         }
 
@@ -77,10 +80,6 @@ namespace Rogue
             }*/
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            // <<< START TEST STUFF >>>
-            spriteBatch.DrawString(sf, protagonist.IsAttacking().ToString(), new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.White);
-            spriteBatch.DrawString(sf, protagonist.IsWalking().ToString(), new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.LightGreen);
-            // <<< END TEST STUFF >>>
             protagonist.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
