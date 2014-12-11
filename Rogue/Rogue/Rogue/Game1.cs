@@ -22,6 +22,8 @@ namespace Rogue
         Texture2D background, spritesheet, tilesheet;
         Sprite protagonist;
         SpriteFont sf;
+        KeyboardState ks;
+        Keys[] applicableKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public Game1()
         {
@@ -44,9 +46,7 @@ namespace Rogue
             tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
 
-            sf = Content.Load<SpriteFont>("DrawnString");
-            protagonist = new Sprite(new Vector2(300, 300), spritesheet,
-                new Rectangle(8, 0, 57, 75), Vector2.Zero, 1.4f);
+            protagonist = new Sprite(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
         }
 
         protected override void UnloadContent()
@@ -55,8 +55,29 @@ namespace Rogue
 
         protected override void Update(GameTime gameTime)
         {
-            if (protagonist.IsWalking())
-                protagonist.Velocity = new Vector2(5, 0);
+            ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.W))
+            {
+                protagonist.Location += new Vector2(0, -2);
+            }
+            if (ks.IsKeyDown(Keys.A))
+            {
+                //protagonist.Frame = 0;
+                protagonist.AddFrame(new Rectangle(68, 0, 50, 75));
+                protagonist.AddFrame(new Rectangle(120, 0, 50, 75));
+                protagonist.Location += new Vector2(-2, 0);
+            }
+            if (ks.IsKeyDown(Keys.S))
+            {
+                protagonist.Location += new Vector2(0, 2);
+            }
+            if (ks.IsKeyDown(Keys.D))
+            {
+                protagonist.AddFrame(new Rectangle(178, 0, 50, 75));
+                protagonist.AddFrame(new Rectangle(238, 0, 50, 75));
+                protagonist.Location += new Vector2(2, 0);
+            }
+            protagonist.Update(gameTime);
             base.Update(gameTime);
         }
 

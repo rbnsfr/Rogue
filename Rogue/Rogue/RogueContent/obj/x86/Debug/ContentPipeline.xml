@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
-      <Time>2014-12-10T07:43:00.615-05:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
+      <Time>2014-12-11T07:26:34.1958-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Tilesheet.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
-      <Time>2014-12-10T07:43:00.619-05:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
+      <Time>2014-12-11T07:26:34.1958-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Background.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
-      <Time>2014-12-10T07:43:00.613-05:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
+      <Time>2014-12-11T07:26:34.1948-05:00</Time>
     </Item>
     <Item>
       <Source>DrawnString.spritefont</Source>
@@ -34,8 +34,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
-      <Time>2014-12-10T07:43:00.607-05:00</Time>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
+      <Time>2014-12-11T07:26:34.1568-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -43,10 +43,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

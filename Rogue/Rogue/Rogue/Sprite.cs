@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Rogue
 {
@@ -27,13 +26,8 @@ namespace Rogue
         public int BoundingXPadding = 0;
         public int BoundingYPadding = 0;
 
-        public object tag;
-
-        KeyboardState ks = Keyboard.GetState();
-
         protected Vector2 location = Vector2.Zero;
         protected Vector2 velocity = Vector2.Zero;
-        protected Vector2 origin = Vector2.Zero;
 
         public Sprite(
             Vector2 location,
@@ -50,14 +44,7 @@ namespace Rogue
             frames.Add(initialFrame);
             frameWidth = initialFrame.Width;
             frameHeight = initialFrame.Height;
-
-            this.origin = new Vector2(frameWidth / 2, frameHeight / 2);
-
-            tag = null;
-
         }
-
-        public bool FlipHorizontal { get; set; }
 
         public Vector2 Location
         {
@@ -69,12 +56,6 @@ namespace Rogue
         {
             get { return velocity; }
             set { velocity = value; }
-        }
-
-        public Vector2 Origin
-        {
-            get { return origin; }
-            set { origin = value; }
         }
 
         public Color TintColor
@@ -122,15 +103,6 @@ namespace Rogue
             }
         }
 
-        public bool IsWalking()
-        {
-            if (ks.IsKeyDown(Keys.W) || ks.IsKeyDown(Keys.A) ||
-                ks.IsKeyDown(Keys.S) || ks.IsKeyDown(Keys.D))
-                return true;
-            else
-                return false;
-        }
-
         public Vector2 Center
         {
             get
@@ -171,18 +143,6 @@ namespace Rogue
             frames.Add(frameRectangle);
         }
 
-        public float RelativeSize
-        {
-            get
-            {
-                return relativeSize;
-            }
-            set
-            {
-                relativeSize = value;
-            }
-        }
-
         public virtual void Update(GameTime gameTime)
         {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -206,9 +166,9 @@ namespace Rogue
                 Source,
                 tintColor,
                 rotation,
-                origin,
+                new Vector2(frameWidth / 2, frameHeight / 2),
                 relativeSize,
-                this.FlipHorizontal ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
+                SpriteEffects.None,
                 0.0f);
         }
 
