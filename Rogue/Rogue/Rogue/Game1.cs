@@ -20,11 +20,13 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet, cursortexture;
-        Sprite protagonist, cursor;
+        Sprite cursor;
+        Protagonist protagonist;
         SpriteFont sf;
         KeyboardState ks;
         MouseState ms;
         Keys[] applicableKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
+        bool debugMode = false;
 
         public Game1()
         {
@@ -47,9 +49,10 @@ namespace Rogue
             tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
+            sf = Content.Load<SpriteFont>(@"DrawnString");
 
-            protagonist = new Sprite(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
-            cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 1);
+            protagonist = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
         }
 
         protected override void UnloadContent()
@@ -61,30 +64,48 @@ namespace Rogue
             ks = Keyboard.GetState();
             ms = Mouse.GetState();
 
-            if (ks.IsKeyDown(Keys.W))
+            float playerSpeed;
+            if (ks.IsKeyDown(Keys.LeftShift))
+                playerSpeed = 3;
+            else
+                playerSpeed = 1.5f;
+
+            if (ks.IsKeyDown(applicableKeys[0]))
             {
-                protagonist.Location += new Vector2(0, -2);
+                protagonist.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(Keys.A))
+            if (ks.IsKeyDown(applicableKeys[1]))
             {
-                //protagonist.Frame = 0;
                 protagonist.AddFrame(new Rectangle(68, 0, 50, 75));
                 protagonist.AddFrame(new Rectangle(120, 0, 50, 75));
-                protagonist.Location += new Vector2(-2, 0);
+                protagonist.Location += new Vector2(-playerSpeed, 0);
             }
-            if (ks.IsKeyDown(Keys.S))
+            if (ks.IsKeyDown(applicableKeys[2]))
             {
-                protagonist.Location += new Vector2(0, 2);
+                protagonist.Location += new Vector2(0, playerSpeed);
             }
-            if (ks.IsKeyDown(Keys.D))
+            if (ks.IsKeyDown(applicableKeys[3]))
             {
                 protagonist.AddFrame(new Rectangle(178, 0, 50, 75));
                 protagonist.AddFrame(new Rectangle(238, 0, 50, 75));
-                protagonist.Location += new Vector2(2, 0);
+                protagonist.Location += new Vector2(playerSpeed, 0);
             }
-            if (!ks.IsKeyDown(Keys.W) && !ks.IsKeyDown(Keys.A)
-                && !ks.IsKeyDown(Keys.S) && !ks.IsKeyDown(Keys.D))
+            if (!ks.IsKeyDown(applicableKeys[0]) && !ks.IsKeyDown(applicableKeys[1])
+                && !ks.IsKeyDown(applicableKeys[2]) && !ks.IsKeyDown(applicableKeys[3]))
+            {
+                protagonist.Frame = 0;
                 protagonist.Location += new Vector2(0, 0);
+            }
+            if (protagonist.Location.Y < 50)
+                protagonist.Location = new Vector2(protagonist.Location.X, 50);
+            if (protagonist.Location.Y > 446)
+                protagonist.Location = new Vector2(protagonist.Location.X, 446);
+
+            if (ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.LeftAlt) && ks.IsKeyDown(Keys.F1))
+                debugMode = true;
+            else if (ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.LeftAlt) && ks.IsKeyDown(Keys.F2))
+                debugMode = false;
+
             cursor.Location = new Vector2(ms.X, ms.Y);
             protagonist.Update(gameTime);
             base.Update(gameTime);
@@ -111,7 +132,12 @@ namespace Rogue
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
             protagonist.Draw(spriteBatch);
-            spriteBatch.Draw(cursor, Vector2.Zero, Color.White);
+            cursor.Draw(spriteBatch);
+            if (debugMode)
+            {
+                spriteBatch.DrawString(sf, "Frame: " + Convert.ToString(protagonist.Frame), new Vector2(7, 5), Color.LightGreen);
+                spriteBatch.DrawString(sf, "Location: " + Convert.ToString(protagonist.Location), new Vector2(7, 25), Color.IndianRed);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }
