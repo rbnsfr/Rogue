@@ -9,10 +9,14 @@ namespace Rogue
 {
     class Protagonist : Sprite
     {
-        public Protagonist()
+        public Protagonist(
+            Vector2 location,
+            Texture2D texture,
+            Rectangle initialFrame,
+            Vector2 velocity,
+            float relativeSize) : base(location, texture, initialFrame, velocity, relativeSize)
         {
-            // Find out what's wrong
-            // with this wretched thing
+
         }
 
         public void FireProjectile()

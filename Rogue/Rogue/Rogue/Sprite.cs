@@ -17,7 +17,6 @@ namespace Rogue
         private int currentFrame;
         private float frameTime = 0.1f;
         private float timeForCurrentFrame = 0.0f;
-        private int numberOfFrames;
 
         private Color tintColor = Color.White;
         private float rotation = 0.0f;

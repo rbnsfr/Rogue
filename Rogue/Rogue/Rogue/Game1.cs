@@ -25,7 +25,8 @@ namespace Rogue
         SpriteFont sf;
         KeyboardState ks;
         MouseState ms;
-        ManageCommands commands = new ManageCommands();
+        ManageCommands mgrcommands = new ManageCommands();
+        ManageRandom mgrrandom = new ManageRandom();
         Keys[] applicableKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
 
         public Game1()
@@ -103,7 +104,7 @@ namespace Rogue
             if (protagonist.Location.Y > 446)
                 protagonist.Location = new Vector2(protagonist.Location.X, 446);
 
-            commands.CheckCommands();
+            mgrcommands.CheckCommands();
 
             cursor.Location = new Vector2(ms.X, ms.Y);
             protagonist.Update(gameTime);
@@ -113,7 +114,7 @@ namespace Rogue
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            /*switch (randomManager.RandomNumber)
+            switch (mgrrandom.RandomNumber)
             {
                 case 0:
                     // Draw stone tile
@@ -127,12 +128,12 @@ namespace Rogue
                 case 3:
                     // Draw hole
                     break;
-            }*/
+            }
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
             protagonist.Draw(spriteBatch);
             cursor.Draw(spriteBatch);
-            if (commands.DebugMode)
+            if (mgrcommands.DebugMode)
             {
                 spriteBatch.DrawString(sf, "Frame: " + Convert.ToString(protagonist.Frame), new Vector2(7, 5), Color.LightGreen);
                 spriteBatch.DrawString(sf, "Location: " + Convert.ToString(protagonist.Location), new Vector2(7, 25), Color.IndianRed);
