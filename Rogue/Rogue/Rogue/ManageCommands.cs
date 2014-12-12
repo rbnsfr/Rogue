@@ -25,9 +25,11 @@ namespace Rogue
 
         public void CheckCommands()
         {
-            if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.Tab) && cmdks.IsKeyDown(Keys.N) && !DebugMode)
+            cmdks = Keyboard.GetState();
+
+            if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.LeftShift) && cmdks.IsKeyDown(Keys.OemTilde) && !DebugMode)
                 DebugMode = true;
-            else if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.Tab) && cmdks.IsKeyDown(Keys.M) && DebugMode)
+            else if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.LeftShift) && cmdks.IsKeyDown(Keys.OemTilde) && DebugMode)
                 DebugMode = false;
         }
     }

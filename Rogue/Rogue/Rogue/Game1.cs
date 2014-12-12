@@ -20,8 +20,8 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet, cursortexture;
-        Sprite cursor;
-        Sprite protagonist;
+        Sprite cursor, projectile;
+        Protagonist protagonist;
         SpriteFont sf;
         KeyboardState ks;
         MouseState ms;
@@ -52,8 +52,9 @@ namespace Rogue
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
             sf = Content.Load<SpriteFont>(@"DrawnString");
 
-            protagonist = new Sprite(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            protagonist = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
+            projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(228, 9, 15, 15), Vector2.Zero, 1);
         }
 
         protected override void UnloadContent()

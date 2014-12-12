@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
-      <Time>2014-12-12T10:43:24.3094-05:00</Time>
+      <Time>2014-12-12T13:30:18.2294-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Tilesheet.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
-      <Time>2014-12-12T10:43:24.3594-05:00</Time>
+      <Time>2014-12-12T13:23:33.6084-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Background.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
-      <Time>2014-12-12T10:43:24.2284-05:00</Time>
+      <Time>2014-12-12T13:23:33.5904-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Cursor.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb</Output>
-      <Time>2014-12-12T10:43:24.2604-05:00</Time>
+      <Time>2014-12-12T13:23:33.5904-05:00</Time>
     </Item>
     <Item>
       <Source>DrawnString.spritefont</Source>
@@ -44,7 +44,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
-      <Time>2014-12-12T10:43:24.1074-05:00</Time>
+      <Time>2014-12-12T13:23:33.5544-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -52,10 +52,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
