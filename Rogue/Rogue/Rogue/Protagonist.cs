@@ -9,10 +9,15 @@ namespace Rogue
 {
     class Protagonist : Sprite
     {
+        public Protagonist()
+        {
+            // Find out what's wrong
+            // with this wretched thing
+        }
+
         public void FireProjectile()
         {
-            // Fire projectile in the direction
-            // of the arrow key pressed
+            
         }
     }
 }

@@ -17,10 +17,11 @@ namespace Rogue
         private int currentFrame;
         private float frameTime = 0.1f;
         private float timeForCurrentFrame = 0.0f;
+        private int numberOfFrames;
 
         private Color tintColor = Color.White;
         private float rotation = 0.0f;
-        private float relativeSize;
+        private bool flipHorizontal;
 
         public int CollisionRadius = 0;
         public int BoundingXPadding = 0;
@@ -28,6 +29,7 @@ namespace Rogue
 
         protected Vector2 location = Vector2.Zero;
         protected Vector2 velocity = Vector2.Zero;
+        protected float relativeSize;
 
         public Sprite(
             Vector2 location,
@@ -86,6 +88,11 @@ namespace Rogue
             set { frameTime = MathHelper.Max(0, value); }
         }
 
+        public int NumberOfFrames
+        {
+            get { return frames.Count; }
+        }
+
         public Rectangle Source
         {
             get { return frames[currentFrame]; }
@@ -129,6 +136,12 @@ namespace Rogue
             return BoundingBoxRect.Intersects(OtherBox);
         }
 
+        public bool FlipHorizontal
+        {
+            get { return flipHorizontal; }
+            set { flipHorizontal = value; }
+        }
+
         public bool IsCircleColliding(Vector2 otherCenter, float otherRadius)
         {
             if (Vector2.Distance(Center, otherCenter) <
@@ -168,7 +181,7 @@ namespace Rogue
                 rotation,
                 new Vector2(frameWidth / 2, frameHeight / 2),
                 relativeSize,
-                SpriteEffects.None,
+                flipHorizontal ? SpriteEffects.FlipHorizontally : SpriteEffects.None,
                 0.0f);
         }
 

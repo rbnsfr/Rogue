@@ -28,3 +28,14 @@ C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Microsof
 C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.exe
 C:\Users\EAHS CS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.pdb
 C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.csprojResolveAssemblyReference.cache
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.exe
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.exe
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.pdb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.pdb

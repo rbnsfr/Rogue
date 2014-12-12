@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
-      <Time>2014-12-11T10:35:10.3938-05:00</Time>
+      <Output>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
+      <Time>2014-12-12T08:02:26.197-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Tilesheet.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
-      <Time>2014-12-11T10:35:10.3938-05:00</Time>
+      <Output>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
+      <Time>2014-12-12T07:33:16.487-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Background.png</Source>
@@ -25,17 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
-      <Time>2014-12-11T10:35:10.3928-05:00</Time>
-    </Item>
-    <Item>
-      <Source>DrawnString.spritefont</Source>
-      <Name>DrawnString</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
-      <Time>2014-12-11T10:35:10.3498-05:00</Time>
+      <Output>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
+      <Time>2014-12-12T07:33:16.469-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Cursor.png</Source>
@@ -43,8 +34,17 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb</Output>
-      <Time>2014-12-11T10:52:33.9278-05:00</Time>
+      <Output>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb</Output>
+      <Time>2014-12-12T07:33:16.471-05:00</Time>
+    </Item>
+    <Item>
+      <Source>DrawnString.spritefont</Source>
+      <Name>DrawnString</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb</Output>
+      <Time>2014-12-12T07:33:16.449-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -52,10 +52,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

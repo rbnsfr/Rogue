@@ -107,11 +107,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManageCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Protagonist.cs" />
-    <Compile Include="RandomManager.cs" />
+    <Compile Include="ManageRandom.cs" />
     <Compile Include="Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

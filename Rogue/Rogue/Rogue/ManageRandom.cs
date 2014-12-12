@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rogue
 {
-    class RandomManager
+    class ManageRandom
     {
         private Random rand = new Random();
         private int randomnumber { get { return rand.Next(0, 4); } }

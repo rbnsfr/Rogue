@@ -21,12 +21,12 @@ namespace Rogue
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet, cursortexture;
         Sprite cursor;
-        Protagonist protagonist;
+        Sprite protagonist;
         SpriteFont sf;
         KeyboardState ks;
         MouseState ms;
+        ManageCommands commands = new ManageCommands();
         Keys[] applicableKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
-        bool debugMode = false;
 
         public Game1()
         {
@@ -51,7 +51,7 @@ namespace Rogue
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
             sf = Content.Load<SpriteFont>(@"DrawnString");
 
-            protagonist = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            protagonist = new Sprite(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
         }
 
@@ -66,9 +66,9 @@ namespace Rogue
 
             float playerSpeed;
             if (ks.IsKeyDown(Keys.LeftShift))
-                playerSpeed = 3;
+                playerSpeed = 4;
             else
-                playerSpeed = 1.5f;
+                playerSpeed = 2;
 
             if (ks.IsKeyDown(applicableKeys[0]))
             {
@@ -76,9 +76,10 @@ namespace Rogue
             }
             if (ks.IsKeyDown(applicableKeys[1]))
             {
-                protagonist.AddFrame(new Rectangle(68, 0, 50, 75));
-                protagonist.AddFrame(new Rectangle(120, 0, 50, 75));
+                protagonist.AddFrame(new Rectangle(60, 0, 58, 75));
+                protagonist.AddFrame(new Rectangle(120, 0, 58, 75));
                 protagonist.Location += new Vector2(-playerSpeed, 0);
+                protagonist.FlipHorizontal = false;
             }
             if (ks.IsKeyDown(applicableKeys[2]))
             {
@@ -86,14 +87,15 @@ namespace Rogue
             }
             if (ks.IsKeyDown(applicableKeys[3]))
             {
-                protagonist.AddFrame(new Rectangle(178, 0, 50, 75));
-                protagonist.AddFrame(new Rectangle(238, 0, 50, 75));
+                protagonist.AddFrame(new Rectangle(60, 0, 58, 75));
+                protagonist.AddFrame(new Rectangle(120, 0, 58, 75));
                 protagonist.Location += new Vector2(playerSpeed, 0);
+                protagonist.FlipHorizontal = true;
             }
             if (!ks.IsKeyDown(applicableKeys[0]) && !ks.IsKeyDown(applicableKeys[1])
                 && !ks.IsKeyDown(applicableKeys[2]) && !ks.IsKeyDown(applicableKeys[3]))
             {
-                protagonist.Frame = 0;
+                protagonist.AddFrame(new Rectangle(0, 0, 58, 75));
                 protagonist.Location += new Vector2(0, 0);
             }
             if (protagonist.Location.Y < 50)
@@ -101,10 +103,7 @@ namespace Rogue
             if (protagonist.Location.Y > 446)
                 protagonist.Location = new Vector2(protagonist.Location.X, 446);
 
-            if (ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.LeftAlt) && ks.IsKeyDown(Keys.F1))
-                debugMode = true;
-            else if (ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.LeftAlt) && ks.IsKeyDown(Keys.F2))
-                debugMode = false;
+            commands.CheckCommands();
 
             cursor.Location = new Vector2(ms.X, ms.Y);
             protagonist.Update(gameTime);
@@ -133,7 +132,7 @@ namespace Rogue
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
             protagonist.Draw(spriteBatch);
             cursor.Draw(spriteBatch);
-            if (debugMode)
+            if (commands.DebugMode)
             {
                 spriteBatch.DrawString(sf, "Frame: " + Convert.ToString(protagonist.Frame), new Vector2(7, 5), Color.LightGreen);
                 spriteBatch.DrawString(sf, "Location: " + Convert.ToString(protagonist.Location), new Vector2(7, 25), Color.IndianRed);
