@@ -15,7 +15,7 @@ namespace Rogue
     class ManageCommands
     {
         private bool debugMode;
-        KeyboardState cmdks;
+        KeyboardState ks;
 
         public bool DebugMode
         {
@@ -25,11 +25,11 @@ namespace Rogue
 
         public void CheckCommands()
         {
-            cmdks = Keyboard.GetState();
+            ks = Keyboard.GetState();
 
-            if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.LeftShift) && cmdks.IsKeyDown(Keys.OemTilde) && !DebugMode)
+            if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.OemTilde) && !DebugMode)
                 DebugMode = true;
-            else if (cmdks.IsKeyDown(Keys.LeftControl) && cmdks.IsKeyDown(Keys.LeftShift) && cmdks.IsKeyDown(Keys.OemTilde) && DebugMode)
+            else if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.OemTilde) && DebugMode)
                 DebugMode = false;
         }
     }

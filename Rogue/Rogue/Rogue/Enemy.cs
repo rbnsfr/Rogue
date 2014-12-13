@@ -11,25 +11,15 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Rogue
 {
-    class Protagonist : Sprite
+    class Enemy : Sprite
     {
-        public Protagonist(
+        public Enemy(
             Vector2 location,
             Texture2D texture,
             Rectangle initialFrame,
             Vector2 velocity,
             float relativeSize) : base(location, texture, initialFrame, velocity, relativeSize)
         {
-        }
-
-        KeyboardState ks;
-
-        public void FireProjectile()
-        {
-            if (ks.IsKeyDown(Keys.Up))
-            {
-
-            }
         }
     }
 }

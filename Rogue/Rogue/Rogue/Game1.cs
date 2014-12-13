@@ -21,13 +21,15 @@ namespace Rogue
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet, cursortexture;
         Sprite cursor, projectile;
-        Protagonist protagonist;
+        Protagonist firstPlayer, secondPlayer, thirdPlayer;
         SpriteFont sf;
         KeyboardState ks;
         MouseState ms;
         ManageCommands mgrcommands = new ManageCommands();
         ManageRandom mgrrandom = new ManageRandom();
-        Keys[] applicableKeys = { Keys.W, Keys.A, Keys.S, Keys.D };
+        Keys[,] movementKeys = { { Keys.W, Keys.A, Keys.S, Keys.D },
+                                 { Keys.T, Keys.F, Keys.G, Keys.H },
+                                 { Keys.I, Keys.J, Keys.K, Keys.L } };
 
         public Game1()
         {
@@ -52,7 +54,9 @@ namespace Rogue
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
             sf = Content.Load<SpriteFont>(@"DrawnString");
 
-            protagonist = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            firstPlayer = new Protagonist(new Vector2(200, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            secondPlayer = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            thirdPlayer = new Protagonist(new Vector2(400, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
             projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(228, 9, 15, 15), Vector2.Zero, 1);
         }
@@ -63,8 +67,26 @@ namespace Rogue
 
         protected override void Update(GameTime gameTime)
         {
-            ks = Keyboard.GetState();
+            if (firstPlayer.Location.Y < 50)
+                firstPlayer.Location = new Vector2(firstPlayer.Location.X, 50);
+            if (firstPlayer.Location.Y > 446)
+                firstPlayer.Location = new Vector2(firstPlayer.Location.X, 446);
+
+            mgrcommands.CheckCommands();
+            UpdateMovement();
+
             ms = Mouse.GetState();
+            cursor.Location = new Vector2(ms.X, ms.Y);
+
+            firstPlayer.Update(gameTime);
+            secondPlayer.Update(gameTime);
+            thirdPlayer.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        protected void UpdateMovement()
+        {
+            ks = Keyboard.GetState();
 
             float playerSpeed;
             if (ks.IsKeyDown(Keys.LeftShift))
@@ -72,72 +94,112 @@ namespace Rogue
             else
                 playerSpeed = 2;
 
-            if (ks.IsKeyDown(applicableKeys[0]))
+            if (ks.IsKeyDown(movementKeys[0, 0]))
             {
-                protagonist.Location += new Vector2(0, -playerSpeed);
+                firstPlayer.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(applicableKeys[1]))
+            if (ks.IsKeyDown(movementKeys[1, 0]))
             {
-                protagonist.AddFrame(new Rectangle(60, 0, 58, 75));
-                protagonist.AddFrame(new Rectangle(120, 0, 58, 75));
-                protagonist.Location += new Vector2(-playerSpeed, 0);
-                protagonist.FlipHorizontal = false;
+                secondPlayer.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(applicableKeys[2]))
+            if (ks.IsKeyDown(movementKeys[2, 0]))
             {
-                protagonist.Location += new Vector2(0, playerSpeed);
+                thirdPlayer.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(applicableKeys[3]))
-            {
-                protagonist.AddFrame(new Rectangle(60, 0, 58, 75));
-                protagonist.AddFrame(new Rectangle(120, 0, 58, 75));
-                protagonist.Location += new Vector2(playerSpeed, 0);
-                protagonist.FlipHorizontal = true;
-            }
-            if (!ks.IsKeyDown(applicableKeys[0]) && !ks.IsKeyDown(applicableKeys[1])
-                && !ks.IsKeyDown(applicableKeys[2]) && !ks.IsKeyDown(applicableKeys[3]))
-            {
-                protagonist.AddFrame(new Rectangle(0, 0, 58, 75));
-                protagonist.Location += new Vector2(0, 0);
-            }
-            if (protagonist.Location.Y < 50)
-                protagonist.Location = new Vector2(protagonist.Location.X, 50);
-            if (protagonist.Location.Y > 446)
-                protagonist.Location = new Vector2(protagonist.Location.X, 446);
 
-            mgrcommands.CheckCommands();
+            if (ks.IsKeyDown(movementKeys[0, 1]))
+            {
+                firstPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                firstPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                firstPlayer.Location += new Vector2(-playerSpeed, 0);
+                firstPlayer.FlipHorizontal = false;
+            }
+            if (ks.IsKeyDown(movementKeys[1, 1]))
+            {
+                secondPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                secondPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                secondPlayer.Location += new Vector2(-playerSpeed, 0);
+                secondPlayer.FlipHorizontal = false;
+            }
+            if (ks.IsKeyDown(movementKeys[2, 1]))
+            {
+                thirdPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                thirdPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                thirdPlayer.Location += new Vector2(-playerSpeed, 0);
+                thirdPlayer.FlipHorizontal = false;
+            }
 
-            cursor.Location = new Vector2(ms.X, ms.Y);
-            protagonist.Update(gameTime);
-            base.Update(gameTime);
+            if (ks.IsKeyDown(movementKeys[0, 2]))
+            {
+                firstPlayer.Location += new Vector2(0, playerSpeed);
+            }
+            if (ks.IsKeyDown(movementKeys[1, 2]))
+            {
+                secondPlayer.Location += new Vector2(0, playerSpeed);
+            }
+            if (ks.IsKeyDown(movementKeys[2, 2]))
+            {
+                thirdPlayer.Location += new Vector2(0, playerSpeed);
+            }
+
+            if (ks.IsKeyDown(movementKeys[0, 3]))
+            {
+                firstPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                firstPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                firstPlayer.Location += new Vector2(playerSpeed, 0);
+                firstPlayer.FlipHorizontal = true;
+            }
+            if (ks.IsKeyDown(movementKeys[1, 3]))
+            {
+                secondPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                secondPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                secondPlayer.Location += new Vector2(playerSpeed, 0);
+                secondPlayer.FlipHorizontal = true;
+            }
+            if (ks.IsKeyDown(movementKeys[2, 3]))
+            {
+                thirdPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
+                thirdPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
+                thirdPlayer.Location += new Vector2(playerSpeed, 0);
+                thirdPlayer.FlipHorizontal = true;
+            }
+
+            if (!ks.IsKeyDown(movementKeys[0, 0]) && !ks.IsKeyDown(movementKeys[0, 1])
+                && !ks.IsKeyDown(movementKeys[0, 2]) && !ks.IsKeyDown(movementKeys[0, 3]))
+            {
+                firstPlayer.Location += new Vector2(0, 0);
+            }
+            if (!ks.IsKeyDown(movementKeys[1, 0]) && !ks.IsKeyDown(movementKeys[1, 1])
+                && !ks.IsKeyDown(movementKeys[1, 2]) && !ks.IsKeyDown(movementKeys[1, 3]))
+            {
+                secondPlayer.Location += new Vector2(0, 0);
+            }
+            if (!ks.IsKeyDown(movementKeys[2, 0]) && !ks.IsKeyDown(movementKeys[2, 1])
+                && !ks.IsKeyDown(movementKeys[2, 2]) && !ks.IsKeyDown(movementKeys[2, 3]))
+            {
+                thirdPlayer.Location += new Vector2(0, 0);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            switch (mgrrandom.RandomNumber)
-            {
-                case 0:
-                    // Draw stone tile
-                    break;
-                case 1:
-                    // Draw grass tile
-                    break;
-                case 2:
-                    // Draw hell tile
-                    break;
-                case 3:
-                    // Draw hole
-                    break;
-            }
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            protagonist.Draw(spriteBatch);
+            firstPlayer.Draw(spriteBatch);
+            secondPlayer.TintColor = Color.OrangeRed;
+            secondPlayer.Draw(spriteBatch);
+            thirdPlayer.TintColor = Color.CornflowerBlue;
+            thirdPlayer.Draw(spriteBatch);
             cursor.Draw(spriteBatch);
             if (mgrcommands.DebugMode)
             {
-                spriteBatch.DrawString(sf, "Frame: " + Convert.ToString(protagonist.Frame), new Vector2(7, 5), Color.LightGreen);
-                spriteBatch.DrawString(sf, "Location: " + Convert.ToString(protagonist.Location), new Vector2(7, 25), Color.IndianRed);
+                spriteBatch.DrawString(sf, "PLAYER 1 Frame: " + Convert.ToString(firstPlayer.Frame), new Vector2(7, 5), Color.LightGreen);
+                spriteBatch.DrawString(sf, "PLAYER 1 Location: " + Convert.ToString(firstPlayer.Location), new Vector2(7, 25), Color.IndianRed);
+                spriteBatch.DrawString(sf, "PLAYER 2 Frame: " + Convert.ToString(secondPlayer.Frame), new Vector2(7, 45), Color.LightGreen);
+                spriteBatch.DrawString(sf, "PLAYER 2 Location: " + Convert.ToString(secondPlayer.Location), new Vector2(7, 65), Color.IndianRed);
+                spriteBatch.DrawString(sf, "PLAYER 3 Frame: " + Convert.ToString(thirdPlayer.Frame), new Vector2(7, 85), Color.LightGreen);
+                spriteBatch.DrawString(sf, "PLAYER 3 Location: " + Convert.ToString(thirdPlayer.Location), new Vector2(7, 105), Color.IndianRed);
             }
             spriteBatch.End();
             base.Draw(gameTime);
