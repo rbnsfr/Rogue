@@ -21,5 +21,20 @@ namespace Rogue
             float relativeSize) : base(location, texture, initialFrame, velocity, relativeSize)
         {
         }
+
+        private float attackDamage;
+        private bool isDead;
+
+        public float AttackDamage
+        {
+            get { return attackDamage; }
+            set { attackDamage = value; }
+        }
+        
+        public bool IsDead
+        {
+            get { return isDead; }
+            set { isDead = value; }
+        }
     }
 }

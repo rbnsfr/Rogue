@@ -12,10 +12,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Rogue
 {
-    class ManageCommands
+    class CommandManager
     {
         private bool debugMode;
-        KeyboardState ks;
+        private KeyboardState ks;
 
         public bool DebugMode
         {

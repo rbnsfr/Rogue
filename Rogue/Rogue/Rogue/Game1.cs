@@ -19,17 +19,21 @@ namespace Rogue
         //RandomManager randomManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D background, spritesheet, tilesheet, cursortexture;
+        Texture2D background, spritesheet, tilesheet, cursortexture, ui;
         Sprite cursor, projectile;
         Protagonist firstPlayer, secondPlayer, thirdPlayer;
-        SpriteFont sf;
+        SpriteFont consbold, consnrml;
         KeyboardState ks;
         MouseState ms;
-        ManageCommands mgrcommands = new ManageCommands();
-        ManageRandom mgrrandom = new ManageRandom();
+        CommandManager mgrCommands = new CommandManager();
+        RandomManager mgrRandom = new RandomManager();
+        BoundaryManager mgrBoundary = new BoundaryManager();
         Keys[,] movementKeys = { { Keys.W, Keys.A, Keys.S, Keys.D },
                                  { Keys.T, Keys.F, Keys.G, Keys.H },
                                  { Keys.I, Keys.J, Keys.K, Keys.L } };
+        bool firstPlayerParticipating = true,
+            secondPlayerParticipating = false,
+            thirdPlayerParticipating = false;
 
         public Game1()
         {
@@ -52,7 +56,9 @@ namespace Rogue
             tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
-            sf = Content.Load<SpriteFont>(@"DrawnString");
+            ui = Content.Load<Texture2D>(@"Test\Interface");
+            consbold = Content.Load<SpriteFont>(@"Test\ConsoleBold");
+            consnrml = Content.Load<SpriteFont>(@"Test\Console");
 
             firstPlayer = new Protagonist(new Vector2(200, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             secondPlayer = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
@@ -72,8 +78,7 @@ namespace Rogue
             if (firstPlayer.Location.Y > 446)
                 firstPlayer.Location = new Vector2(firstPlayer.Location.X, 446);
 
-            mgrcommands.CheckCommands();
-            UpdateMovement();
+            mgrCommands.CheckCommands(); UpdateMovement(); UpdateParticipation(); CheckBoundaries();
 
             ms = Mouse.GetState();
             cursor.Location = new Vector2(ms.X, ms.Y);
@@ -94,34 +99,34 @@ namespace Rogue
             else
                 playerSpeed = 2;
 
-            if (ks.IsKeyDown(movementKeys[0, 0]))
+            if (ks.IsKeyDown(movementKeys[0, 0]) && firstPlayerParticipating)
             {
                 firstPlayer.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(movementKeys[1, 0]))
+            if (ks.IsKeyDown(movementKeys[1, 0]) && secondPlayerParticipating)
             {
                 secondPlayer.Location += new Vector2(0, -playerSpeed);
             }
-            if (ks.IsKeyDown(movementKeys[2, 0]))
+            if (ks.IsKeyDown(movementKeys[2, 0]) && thirdPlayerParticipating)
             {
                 thirdPlayer.Location += new Vector2(0, -playerSpeed);
             }
 
-            if (ks.IsKeyDown(movementKeys[0, 1]))
+            if (ks.IsKeyDown(movementKeys[0, 1]) && firstPlayerParticipating)
             {
                 firstPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 firstPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
                 firstPlayer.Location += new Vector2(-playerSpeed, 0);
                 firstPlayer.FlipHorizontal = false;
             }
-            if (ks.IsKeyDown(movementKeys[1, 1]))
+            if (ks.IsKeyDown(movementKeys[1, 1]) && secondPlayerParticipating)
             {
                 secondPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 secondPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
                 secondPlayer.Location += new Vector2(-playerSpeed, 0);
                 secondPlayer.FlipHorizontal = false;
             }
-            if (ks.IsKeyDown(movementKeys[2, 1]))
+            if (ks.IsKeyDown(movementKeys[2, 1]) && secondPlayerParticipating)
             {
                 thirdPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 thirdPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
@@ -129,34 +134,34 @@ namespace Rogue
                 thirdPlayer.FlipHorizontal = false;
             }
 
-            if (ks.IsKeyDown(movementKeys[0, 2]))
+            if (ks.IsKeyDown(movementKeys[0, 2]) && firstPlayerParticipating)
             {
                 firstPlayer.Location += new Vector2(0, playerSpeed);
             }
-            if (ks.IsKeyDown(movementKeys[1, 2]))
+            if (ks.IsKeyDown(movementKeys[1, 2]) && secondPlayerParticipating)
             {
                 secondPlayer.Location += new Vector2(0, playerSpeed);
             }
-            if (ks.IsKeyDown(movementKeys[2, 2]))
+            if (ks.IsKeyDown(movementKeys[2, 2]) && thirdPlayerParticipating)
             {
                 thirdPlayer.Location += new Vector2(0, playerSpeed);
             }
 
-            if (ks.IsKeyDown(movementKeys[0, 3]))
+            if (ks.IsKeyDown(movementKeys[0, 3]) && firstPlayerParticipating)
             {
                 firstPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 firstPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
                 firstPlayer.Location += new Vector2(playerSpeed, 0);
                 firstPlayer.FlipHorizontal = true;
             }
-            if (ks.IsKeyDown(movementKeys[1, 3]))
+            if (ks.IsKeyDown(movementKeys[1, 3]) && secondPlayerParticipating)
             {
                 secondPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 secondPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
                 secondPlayer.Location += new Vector2(playerSpeed, 0);
                 secondPlayer.FlipHorizontal = true;
             }
-            if (ks.IsKeyDown(movementKeys[2, 3]))
+            if (ks.IsKeyDown(movementKeys[2, 3]) && thirdPlayerParticipating)
             {
                 thirdPlayer.AddFrame(new Rectangle(60, 0, 58, 75));
                 thirdPlayer.AddFrame(new Rectangle(120, 0, 58, 75));
@@ -165,20 +170,73 @@ namespace Rogue
             }
 
             if (!ks.IsKeyDown(movementKeys[0, 0]) && !ks.IsKeyDown(movementKeys[0, 1])
-                && !ks.IsKeyDown(movementKeys[0, 2]) && !ks.IsKeyDown(movementKeys[0, 3]))
+                && !ks.IsKeyDown(movementKeys[0, 2]) && !ks.IsKeyDown(movementKeys[0, 3])
+                && firstPlayerParticipating)
             {
                 firstPlayer.Location += new Vector2(0, 0);
             }
             if (!ks.IsKeyDown(movementKeys[1, 0]) && !ks.IsKeyDown(movementKeys[1, 1])
-                && !ks.IsKeyDown(movementKeys[1, 2]) && !ks.IsKeyDown(movementKeys[1, 3]))
+                && !ks.IsKeyDown(movementKeys[1, 2]) && !ks.IsKeyDown(movementKeys[1, 3])
+                && secondPlayerParticipating)
             {
                 secondPlayer.Location += new Vector2(0, 0);
             }
             if (!ks.IsKeyDown(movementKeys[2, 0]) && !ks.IsKeyDown(movementKeys[2, 1])
-                && !ks.IsKeyDown(movementKeys[2, 2]) && !ks.IsKeyDown(movementKeys[2, 3]))
+                && !ks.IsKeyDown(movementKeys[2, 2]) && !ks.IsKeyDown(movementKeys[2, 3])
+                && thirdPlayerParticipating)
             {
                 thirdPlayer.Location += new Vector2(0, 0);
             }
+        }
+
+        protected void UpdateParticipation()
+        {
+            ks = Keyboard.GetState();
+
+            if (ks.IsKeyDown(Keys.D1) && !firstPlayerParticipating)
+                firstPlayerParticipating = true;
+            else if (ks.IsKeyDown(Keys.D1) && firstPlayerParticipating)
+                firstPlayerParticipating = false;
+
+            if (ks.IsKeyDown(Keys.D2) && !secondPlayerParticipating)
+                secondPlayerParticipating = true;
+            else if (ks.IsKeyDown(Keys.D2) && secondPlayerParticipating)
+                secondPlayerParticipating = false;
+
+            if (ks.IsKeyDown(Keys.D3) && !thirdPlayerParticipating)
+                thirdPlayerParticipating = true;
+            else if (ks.IsKeyDown(Keys.D3) && thirdPlayerParticipating)
+                thirdPlayerParticipating = false;
+        }
+
+        protected void CheckBoundaries()
+        {
+            if (firstPlayer.Location.X < mgrBoundary.MinX)
+                firstPlayer.Location = new Vector2(mgrBoundary.MinX, firstPlayer.Location.Y);
+            if (firstPlayer.Location.X > mgrBoundary.MaxX)
+                firstPlayer.Location = new Vector2(mgrBoundary.MaxX, firstPlayer.Location.Y);
+            if (firstPlayer.Location.Y < mgrBoundary.MinY)
+                firstPlayer.Location = new Vector2(firstPlayer.Location.X, mgrBoundary.MinY);
+            if (firstPlayer.Location.Y > mgrBoundary.MaxY)
+                firstPlayer.Location = new Vector2(firstPlayer.Location.X, mgrBoundary.MaxY);
+
+            if (secondPlayer.Location.X < mgrBoundary.MinX)
+                secondPlayer.Location = new Vector2(mgrBoundary.MinX, secondPlayer.Location.Y);
+            if (secondPlayer.Location.X > mgrBoundary.MaxX)
+                secondPlayer.Location = new Vector2(mgrBoundary.MaxX, secondPlayer.Location.Y);
+            if (secondPlayer.Location.Y < mgrBoundary.MinY)
+                secondPlayer.Location = new Vector2(secondPlayer.Location.X, mgrBoundary.MinY);
+            if (secondPlayer.Location.Y > mgrBoundary.MaxY)
+                secondPlayer.Location = new Vector2(secondPlayer.Location.X, mgrBoundary.MaxY);
+
+            if (thirdPlayer.Location.X < mgrBoundary.MinX)
+                thirdPlayer.Location = new Vector2(mgrBoundary.MinX, thirdPlayer.Location.Y);
+            if (thirdPlayer.Location.X > mgrBoundary.MaxX)
+                thirdPlayer.Location = new Vector2(mgrBoundary.MaxX, thirdPlayer.Location.Y);
+            if (thirdPlayer.Location.Y < mgrBoundary.MinY)
+                thirdPlayer.Location = new Vector2(thirdPlayer.Location.X, mgrBoundary.MinY);
+            if (thirdPlayer.Location.Y > mgrBoundary.MaxY)
+                thirdPlayer.Location = new Vector2(thirdPlayer.Location.X, mgrBoundary.MaxY);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -186,20 +244,32 @@ namespace Rogue
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
             spriteBatch.Draw(background, Vector2.Zero, Color.White);
-            firstPlayer.Draw(spriteBatch);
+            if (firstPlayerParticipating)
+                firstPlayer.Draw(spriteBatch);
             secondPlayer.TintColor = Color.OrangeRed;
-            secondPlayer.Draw(spriteBatch);
+            if (secondPlayerParticipating)
+                secondPlayer.Draw(spriteBatch);
             thirdPlayer.TintColor = Color.CornflowerBlue;
-            thirdPlayer.Draw(spriteBatch);
+            if (thirdPlayerParticipating)
+                thirdPlayer.Draw(spriteBatch);
             cursor.Draw(spriteBatch);
-            if (mgrcommands.DebugMode)
+            if (mgrCommands.DebugMode)
             {
-                spriteBatch.DrawString(sf, "PLAYER 1 Frame: " + Convert.ToString(firstPlayer.Frame), new Vector2(7, 5), Color.LightGreen);
-                spriteBatch.DrawString(sf, "PLAYER 1 Location: " + Convert.ToString(firstPlayer.Location), new Vector2(7, 25), Color.IndianRed);
-                spriteBatch.DrawString(sf, "PLAYER 2 Frame: " + Convert.ToString(secondPlayer.Frame), new Vector2(7, 45), Color.LightGreen);
-                spriteBatch.DrawString(sf, "PLAYER 2 Location: " + Convert.ToString(secondPlayer.Location), new Vector2(7, 65), Color.IndianRed);
-                spriteBatch.DrawString(sf, "PLAYER 3 Frame: " + Convert.ToString(thirdPlayer.Frame), new Vector2(7, 85), Color.LightGreen);
-                spriteBatch.DrawString(sf, "PLAYER 3 Location: " + Convert.ToString(thirdPlayer.Location), new Vector2(7, 105), Color.IndianRed);
+                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 300), Color.White);
+                spriteBatch.DrawString(consbold, "Player 1", new Vector2(7, 5), Color.White);
+                spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(firstPlayerParticipating), new Vector2(7, 25), Color.White);
+                spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(firstPlayer.Frame), new Vector2(7, 45), Color.White);
+                spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(firstPlayer.Location), new Vector2(7, 65), Color.White);
+
+                spriteBatch.DrawString(consbold, "Player 2", new Vector2(7, 105), Color.White);
+                spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(secondPlayerParticipating), new Vector2(7, 125), Color.White);
+                spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(secondPlayer.Frame), new Vector2(7, 145), Color.White);
+                spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(secondPlayer.Location), new Vector2(7, 165), Color.White);
+
+                spriteBatch.DrawString(consbold, "Player 3", new Vector2(7, 205), Color.White);
+                spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(thirdPlayerParticipating), new Vector2(7, 225), Color.White);
+                spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(thirdPlayer.Frame), new Vector2(7, 245), Color.White);
+                spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(thirdPlayer.Location), new Vector2(7, 265), Color.White);
             }
             spriteBatch.End();
             base.Draw(gameTime);

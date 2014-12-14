@@ -12,8 +12,16 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Rogue
 {
-    class ManageBoundaries
+    class BoundaryManager
     {
-        // Room boundary manager
+        private int minX = 0;
+        private int maxX = 750;
+        private int minY = 50;
+        private int maxY = 446;
+
+        public int MinX { get { return minX; } }
+        public int MaxX { get { return maxX; } }
+        public int MinY { get { return minY; } }
+        public int MaxY { get { return maxY; } }
     }
 }
