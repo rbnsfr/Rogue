@@ -23,6 +23,7 @@ namespace Rogue
         }
 
         KeyboardState ks;
+        private bool participating;
 
         public void FireProjectile()
         {
@@ -30,6 +31,12 @@ namespace Rogue
             {
 
             }
+        }
+
+        public bool Participating
+        {
+            get { return participating; }
+            set { participating = value; }
         }
     }
 }

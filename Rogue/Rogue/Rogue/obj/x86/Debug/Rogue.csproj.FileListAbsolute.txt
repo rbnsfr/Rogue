@@ -34,10 +34,13 @@ C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\T
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb
-C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\DrawnString.xnb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.exe
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Rogue.pdb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\obj\x86\Debug\Rogue.pdb
 C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Interface.xnb
 C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\ConsoleBold.xnb
 C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Console.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Interface.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\ConsoleBold.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Console.xnb
+C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Forrest Gump.xnb
