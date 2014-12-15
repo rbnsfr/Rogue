@@ -11,10 +11,10 @@ namespace Rogue
     {
         public Texture2D Texture;
 
-        protected List<Rectangle> frames = new List<Rectangle>();
+        protected Dictionary<string, List<Rectangle>> frames = new Dictionary<string,List<Rectangle>>();
         private int frameWidth = 0;
         private int frameHeight = 0;
-        private int currentFrame;
+        protected int currentFrame;
         private float frameTime = 0.1f;
         private float timeForCurrentFrame = 0.0f;
 
@@ -30,6 +30,23 @@ namespace Rogue
         protected Vector2 velocity = Vector2.Zero;
         protected float relativeSize;
 
+        private String currentAnimation = "default";
+
+        public String CurrentAnimation
+        {
+            get
+            {
+                return currentAnimation;
+            }
+            set
+            {
+                if (frames.ContainsKey(value))
+                {
+                    currentAnimation = value;
+                }
+            }
+        }
+
         public Sprite(
             Vector2 location,
             Texture2D texture,
@@ -42,7 +59,8 @@ namespace Rogue
             this.velocity = velocity;
             this.relativeSize = relativeSize;
 
-            frames.Add(initialFrame);
+            frames.Add("default", new List<Rectangle>());
+            frames[currentAnimation].Add(initialFrame);
             frameWidth = initialFrame.Width;
             frameHeight = initialFrame.Height;
         }
@@ -77,7 +95,7 @@ namespace Rogue
             set
             {
                 currentFrame = (int)MathHelper.Clamp(value, 0,
-                frames.Count - 1);
+                frames[currentAnimation].Count - 1);
             }
         }
 
@@ -89,12 +107,12 @@ namespace Rogue
 
         public int NumberOfFrames
         {
-            get { return frames.Count; }
+            get { return frames[currentAnimation].Count; }
         }
 
         public Rectangle Source
         {
-            get { return frames[currentFrame]; }
+            get { return frames[currentAnimation][currentFrame]; }
         }
 
         public Rectangle Destination
@@ -150,9 +168,14 @@ namespace Rogue
                 return false;
         }
 
-        public void AddFrame(Rectangle frameRectangle)
+        public void AddFrame(String animationKey, Rectangle frameRectangle)
         {
-            frames.Add(frameRectangle);
+            if (!frames.ContainsKey(animationKey))
+            {
+                frames.Add(animationKey, new List<Rectangle>());
+            }
+
+            frames[animationKey].Add(frameRectangle);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -163,7 +186,7 @@ namespace Rogue
 
             if (timeForCurrentFrame >= FrameTime)
             {
-                currentFrame = (currentFrame + 1) % (frames.Count);
+                currentFrame = (currentFrame + 1) % (frames[currentAnimation].Count);
                 timeForCurrentFrame = 0.0f;
             }
 
