@@ -27,10 +27,8 @@ namespace Rogue
         {
             ks = Keyboard.GetState();
 
-            if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.OemTilde) && !DebugMode)
-                DebugMode = true;
-            else if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.OemTilde) && DebugMode)
-                DebugMode = false;
+            if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift) && ks.IsKeyDown(Keys.OemTilde))
+                DebugMode = !DebugMode;
         }
     }
 }

@@ -44,4 +44,3 @@ C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\T
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\ConsoleBold.xnb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Console.xnb
 C:\Users\EASHCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Forrest Gump.xnb
-C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Forrest Gump.xnb

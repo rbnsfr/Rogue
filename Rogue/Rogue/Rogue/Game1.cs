@@ -16,13 +16,12 @@ namespace Rogue
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        //RandomManager randomManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, tilesheet, cursortexture, ui;
         Sprite cursor, projectile;
         SpriteFont consbold, consnrml;
-        KeyboardState ks;
+        KeyboardState oldks, ks;
         MouseState ms;
         CommandManager mgrCommands = new CommandManager();
         RandomManager mgrRandom = new RandomManager();
@@ -44,6 +43,8 @@ namespace Rogue
         protected override void Initialize()
         {
             base.Initialize();
+            oldks = Keyboard.GetState();
+            protagonists[0].Participating = true;
         }
 
         protected override void LoadContent()
@@ -61,7 +62,6 @@ namespace Rogue
             protagonists[1] = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             protagonists[2] = new Protagonist(new Vector2(400, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
 
-
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
             projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(228, 9, 15, 15), Vector2.Zero, 1);
         }
@@ -72,11 +72,8 @@ namespace Rogue
 
         protected override void Update(GameTime gameTime)
         {
-            protagonists[0].Participating = true;
-
-            mgrCommands.CheckCommands();
+            CheckCommands();
             UpdateMovement();
-            UpdateParticipation();
             CheckBoundaries();
 
             ms = Mouse.GetState();
@@ -92,39 +89,47 @@ namespace Rogue
         {
             ks = Keyboard.GetState();
 
-            float playerSpeed;
             if (ks.IsKeyDown(Keys.LeftShift))
-                playerSpeed = 4;
+            {
+                protagonists[0].Sprinting = !protagonists[0].Sprinting;
+            }
+
+            if (protagonists[0].Sprinting)
+            {
+                protagonists[0].Speed = 4;
+            }
             else
-                playerSpeed = 2;
+            {
+                protagonists[0].Speed = 2;
+            }
 
             for (int i = 0; i < protagonists.Length; i++)
             {
-                protagonists[i].State = ProtoStates.Standing;
+                protagonists[i].State = ProtagonistStates.Standing;
 
                 if (protagonists[i].Participating)
                 {
                     if (ks.IsKeyDown(movementKeys[i, 0]))
                     {
-                        protagonists[i].Location += new Vector2(0, -playerSpeed);
+                        protagonists[i].Location += new Vector2(0, -protagonists[0].Speed);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 1]))
                     {
-                        protagonists[i].State = ProtoStates.Walking;
-                        protagonists[i].Location += new Vector2(-playerSpeed, 0);
+                        protagonists[i].State = ProtagonistStates.Walking;
+                        protagonists[i].Location += new Vector2(-protagonists[0].Speed, 0);
                         protagonists[i].FlipHorizontal = false;
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 2]))
                     {
-                        protagonists[i].Location += new Vector2(0, playerSpeed);
+                        protagonists[i].Location += new Vector2(0, protagonists[0].Speed);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 3]))
                     {
-                        protagonists[i].State = ProtoStates.Walking;
-                        protagonists[i].Location += new Vector2(playerSpeed, 0);
+                        protagonists[i].State = ProtagonistStates.Walking;
+                        protagonists[i].Location += new Vector2(protagonists[0].Speed, 0);
                         protagonists[i].FlipHorizontal = true;
                     }
 
@@ -137,24 +142,47 @@ namespace Rogue
             }
         }
 
-        protected void UpdateParticipation()
+        protected void CheckCommands()
         {
-            ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift)
+                && ks.IsKeyDown(Keys.OemTilde))
+            {
+                // Checks to see if keys have just been released
+            }
+            else if (oldks.IsKeyDown(Keys.LeftControl) && oldks.IsKeyDown(Keys.LeftShift)
+                && oldks.IsKeyDown(Keys.OemTilde))
+            {
+                mgrCommands.DebugMode = !mgrCommands.DebugMode;
+            }
 
-            if (ks.IsKeyDown(Keys.D1) && !protagonists[0].Participating)
-                protagonists[0].Participating = true;
-            else if (ks.IsKeyDown(Keys.D1) && protagonists[0].Participating)
-                protagonists[0].Participating = false;
+            if (ks.IsKeyDown(Keys.D1))
+            {
 
-            if (ks.IsKeyDown(Keys.D2) && !protagonists[1].Participating)
-                protagonists[1].Participating = true;
-            else if (ks.IsKeyDown(Keys.D2) && protagonists[1].Participating)
-                protagonists[1].Participating = false;
+            }
+            else if (oldks.IsKeyDown(Keys.D1))
+            {
+                protagonists[0].Participating = !protagonists[0].Participating;
+            }
 
-            if (ks.IsKeyDown(Keys.D3) && !protagonists[2].Participating)
-                protagonists[2].Participating = true;
-            else if (ks.IsKeyDown(Keys.D3) && protagonists[2].Participating)
-                protagonists[2].Participating = false;
+            if (ks.IsKeyDown(Keys.D2))
+            {
+
+            }
+            else if (oldks.IsKeyDown(Keys.D2))
+            {
+                protagonists[1].Participating = !protagonists[1].Participating;
+            }
+
+            if (ks.IsKeyDown(Keys.D3))
+            {
+
+            }
+            else if (oldks.IsKeyDown(Keys.D3))
+            {
+                protagonists[2].Participating = !protagonists[2].Participating;
+            }
+
+            oldks = ks;
         }
 
         protected void CheckBoundaries()
@@ -185,13 +213,14 @@ namespace Rogue
             if (mgrCommands.DebugMode)
             {
                 cursor.Draw(spriteBatch);
-                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 300), Color.White);
+                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 340), Color.White);
                 for (int i = 0; i < protagonists.Length; i++)
                 {
-                    spriteBatch.DrawString(consbold, "Player " + (i + 1), new Vector2(7, 5 + (100 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(protagonists[i].Participating), new Vector2(7, 25 + (100 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(protagonists[i].Frame), new Vector2(7, 45 + (100 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(protagonists[i].Location), new Vector2(7, 65 + (100 * i)), Color.White);
+                    spriteBatch.DrawString(consbold, "Player " + (i + 1), new Vector2(7, 5 + (110 * i)), Color.White);
+                    spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(protagonists[i].Participating), new Vector2(7, 25 + (110 * i)), Color.White);
+                    spriteBatch.DrawString(consnrml, "Sprinting: " + Convert.ToString(protagonists[i].Sprinting), new Vector2(7, 45 + (110 * i)), Color.White);
+                    spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(protagonists[i].Frame), new Vector2(7, 65 + (110 * i)), Color.White);
+                    spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(protagonists[i].Location), new Vector2(7, 85 + (110 * i)), Color.White);
                 }
             }
             spriteBatch.End();

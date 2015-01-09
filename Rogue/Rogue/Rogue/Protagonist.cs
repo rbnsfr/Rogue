@@ -11,15 +11,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Rogue
 {
-    enum ProtoStates
-    {
-        Standing,
-        Walking
-    }
+    enum ProtagonistStates { Standing, Walking }
 
     class Protagonist : Sprite
     {
-        private ProtoStates state;
+        private ProtagonistStates state;
 
         public Protagonist(
             Vector2 location,
@@ -31,46 +27,53 @@ namespace Rogue
             AddFrame("walking", new Rectangle(60, 0, 58, 75));
             AddFrame("walking", new Rectangle(120, 0, 58, 75));
 
-            this.State = ProtoStates.Standing;
-            this.FrameTime = 0.6f;
+            //this.State = ProtagonistStates.Standing;
+            this.FrameTime = 0.1f;
         }
 
-        public ProtoStates State
+        public ProtagonistStates State
         {
             get { return this.state; }
             set
             {
                 state = value;
-                this.currentFrame = 0;
 
                 switch (state)
                 {
-                    case ProtoStates.Standing:
+                    case ProtagonistStates.Standing:
                         this.CurrentAnimation = "default";
                         break;
 
-                    case ProtoStates.Walking:
+                    case ProtagonistStates.Walking:
                         this.CurrentAnimation = "walking";
                         break;
                 }
             }
         }
 
-        KeyboardState ks;
-        private bool participating;
+        private bool participating, sprinting;
+        private float speed;
 
         public void FireProjectile()
         {
-            if (ks.IsKeyDown(Keys.Up))
-            {
-
-            }
         }
 
         public bool Participating
         {
             get { return participating; }
             set { participating = value; }
+        }
+
+        public bool Sprinting
+        {
+            get { return sprinting; }
+            set { sprinting = value; }
+        }
+
+        public float Speed
+        {
+            get { return speed; }
+            set { speed = value; }
         }
     }
 }

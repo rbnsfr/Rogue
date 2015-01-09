@@ -3,6 +3,5 @@ Content\Test\Tilesheet.xnb
 Content\Test\Background.xnb
 Content\Test\Cursor.xnb
 Content\Test\Interface.xnb
-Content\Forrest Gump.xnb
 Content\Test\ConsoleBold.xnb
 Content\Test\Console.xnb
