@@ -37,6 +37,7 @@ namespace Rogue
             set
             {
                 state = value;
+                this.Frame = 0;
 
                 switch (state)
                 {

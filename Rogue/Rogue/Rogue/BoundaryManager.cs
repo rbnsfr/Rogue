@@ -14,8 +14,8 @@ namespace Rogue
 {
     class BoundaryManager
     {
-        private int minX = 0;
-        private int maxX = 750;
+        private int minX = 52;
+        private int maxX = 684;
         private int minY = 50;
         private int maxY = 446;
 

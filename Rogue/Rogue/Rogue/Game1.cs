@@ -23,7 +23,7 @@ namespace Rogue
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
-        CommandManager mgrCommands = new CommandManager();
+        Mode mode = new Mode();
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
         Protagonist[] protagonists = new Protagonist[3];
@@ -45,12 +45,13 @@ namespace Rogue
             base.Initialize();
             oldks = Keyboard.GetState();
             protagonists[0].Participating = true;
+            protagonists[0].Sprinting = false;
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>(@"Test\Background");
+            background = Content.Load<Texture2D>(@"Test\Caverns");
             tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
@@ -145,42 +146,15 @@ namespace Rogue
         protected void CheckCommands()
         {
             if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift)
-                && ks.IsKeyDown(Keys.OemTilde))
-            {
-                // Checks to see if keys have just been released
-            }
+                && ks.IsKeyDown(Keys.OemTilde)) { /* Checks to see if keys have just been released */ }
             else if (oldks.IsKeyDown(Keys.LeftControl) && oldks.IsKeyDown(Keys.LeftShift)
-                && oldks.IsKeyDown(Keys.OemTilde))
-            {
-                mgrCommands.DebugMode = !mgrCommands.DebugMode;
-            }
-
-            if (ks.IsKeyDown(Keys.D1))
-            {
-
-            }
-            else if (oldks.IsKeyDown(Keys.D1))
-            {
-                protagonists[0].Participating = !protagonists[0].Participating;
-            }
-
-            if (ks.IsKeyDown(Keys.D2))
-            {
-
-            }
-            else if (oldks.IsKeyDown(Keys.D2))
-            {
-                protagonists[1].Participating = !protagonists[1].Participating;
-            }
-
-            if (ks.IsKeyDown(Keys.D3))
-            {
-
-            }
-            else if (oldks.IsKeyDown(Keys.D3))
-            {
-                protagonists[2].Participating = !protagonists[2].Participating;
-            }
+                && oldks.IsKeyDown(Keys.OemTilde)) { mode.DebugMode = !mode.DebugMode; }
+            if (ks.IsKeyDown(Keys.D1)) { }
+            else if (oldks.IsKeyDown(Keys.D1)) { protagonists[0].Participating = !protagonists[0].Participating; }
+            if (ks.IsKeyDown(Keys.D2)) { }
+            else if (oldks.IsKeyDown(Keys.D2)) { protagonists[1].Participating = !protagonists[1].Participating; }
+            if (ks.IsKeyDown(Keys.D3)) { }
+            else if (oldks.IsKeyDown(Keys.D3)) { protagonists[2].Participating = !protagonists[2].Participating; }
 
             oldks = ks;
         }
@@ -210,7 +184,7 @@ namespace Rogue
             for (int i = 0; i < protagonists.Length; i++)
                 if (protagonists[i].Participating)
                     protagonists[i].Draw(spriteBatch);
-            if (mgrCommands.DebugMode)
+            if (mode.DebugMode)
             {
                 cursor.Draw(spriteBatch);
                 spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 340), Color.White);

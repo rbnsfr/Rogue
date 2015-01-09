@@ -5,3 +5,4 @@ Content\Test\Cursor.xnb
 Content\Test\Interface.xnb
 Content\Test\ConsoleBold.xnb
 Content\Test\Console.xnb
+Content\Test\Caverns.xnb
