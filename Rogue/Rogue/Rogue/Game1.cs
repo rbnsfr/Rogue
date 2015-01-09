@@ -23,10 +23,12 @@ namespace Rogue
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
-        Mode mode = new Mode();
+        Boolean DebugMode;
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
         Protagonist[] protagonists = new Protagonist[3];
+        Keys[] sprintKeys = { Keys.LeftShift, Keys.Space, Keys.RightShift },
+            fireKeys = { Keys.E, Keys.Y, Keys.O };
         Keys[,] movementKeys = { { Keys.W, Keys.A, Keys.S, Keys.D },
                                  { Keys.T, Keys.F, Keys.G, Keys.H },
                                  { Keys.I, Keys.J, Keys.K, Keys.L } };
@@ -90,20 +92,6 @@ namespace Rogue
         {
             ks = Keyboard.GetState();
 
-            if (ks.IsKeyDown(Keys.LeftShift))
-            {
-                protagonists[0].Sprinting = !protagonists[0].Sprinting;
-            }
-
-            if (protagonists[0].Sprinting)
-            {
-                protagonists[0].Speed = 4;
-            }
-            else
-            {
-                protagonists[0].Speed = 2;
-            }
-
             for (int i = 0; i < protagonists.Length; i++)
             {
                 protagonists[i].State = ProtagonistStates.Standing;
@@ -139,6 +127,20 @@ namespace Rogue
                     {
                         protagonists[i].Location += new Vector2(0, 0);
                     }
+
+                    if (ks.IsKeyDown(sprintKeys[i]))
+                    {
+                        protagonists[i].Sprinting = true;
+                        protagonists[i].Speed = 4;
+                    }
+                    else
+                    {
+                        protagonists[i].Sprinting = false;
+                        protagonists[i].Speed = 2;
+                    }
+
+                    if (ks.IsKeyDown(fireKeys[i]))
+                        protagonists[i].FireProjectile();
                 }
             }
         }
@@ -148,7 +150,7 @@ namespace Rogue
             if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift)
                 && ks.IsKeyDown(Keys.OemTilde)) { /* Checks to see if keys have just been released */ }
             else if (oldks.IsKeyDown(Keys.LeftControl) && oldks.IsKeyDown(Keys.LeftShift)
-                && oldks.IsKeyDown(Keys.OemTilde)) { mode.DebugMode = !mode.DebugMode; }
+                && oldks.IsKeyDown(Keys.OemTilde)) { DebugMode = !DebugMode; }
             if (ks.IsKeyDown(Keys.D1)) { }
             else if (oldks.IsKeyDown(Keys.D1)) { protagonists[0].Participating = !protagonists[0].Participating; }
             if (ks.IsKeyDown(Keys.D2)) { }
@@ -184,7 +186,7 @@ namespace Rogue
             for (int i = 0; i < protagonists.Length; i++)
                 if (protagonists[i].Participating)
                     protagonists[i].Draw(spriteBatch);
-            if (mode.DebugMode)
+            if (DebugMode)
             {
                 cursor.Draw(spriteBatch);
                 spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 340), Color.White);
