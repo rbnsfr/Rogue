@@ -64,6 +64,15 @@
       <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Console.xnb</Output>
       <Time>2014-12-14T17:03:16.3278821-05:00</Time>
     </Item>
+    <Item>
+      <Source>Test\Caverns.png</Source>
+      <Name>Test\Caverns</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Caverns.xnb</Output>
+      <Time>2015-01-09T15:18:24.1169159-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69103B5D-6385-4FFD-9059-9E75C9F7CE00}</ContentProjectGUID>

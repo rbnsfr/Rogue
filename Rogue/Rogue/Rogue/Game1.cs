@@ -54,7 +54,6 @@ namespace Rogue
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = Content.Load<Texture2D>(@"Test\Caverns");
-            tilesheet = Content.Load<Texture2D>(@"Test\Tilesheet");
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
             ui = Content.Load<Texture2D>(@"Test\Interface");
@@ -76,8 +75,8 @@ namespace Rogue
         protected override void Update(GameTime gameTime)
         {
             CheckCommands();
-            UpdateMovement();
             CheckBoundaries();
+            UpdateMovement();
 
             ms = Mouse.GetState();
             cursor.Location = new Vector2(ms.X, ms.Y);
@@ -100,25 +99,25 @@ namespace Rogue
                 {
                     if (ks.IsKeyDown(movementKeys[i, 0]))
                     {
-                        protagonists[i].Location += new Vector2(0, -protagonists[0].Speed);
+                        protagonists[i].Location += new Vector2(0, -protagonists[i].Speed);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 1]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
-                        protagonists[i].Location += new Vector2(-protagonists[0].Speed, 0);
+                        protagonists[i].Location += new Vector2(-protagonists[i].Speed, 0);
                         protagonists[i].FlipHorizontal = false;
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 2]))
                     {
-                        protagonists[i].Location += new Vector2(0, protagonists[0].Speed);
+                        protagonists[i].Location += new Vector2(0, protagonists[i].Speed);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 3]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
-                        protagonists[i].Location += new Vector2(protagonists[0].Speed, 0);
+                        protagonists[i].Location += new Vector2(protagonists[i].Speed, 0);
                         protagonists[i].FlipHorizontal = true;
                     }
 
@@ -138,9 +137,6 @@ namespace Rogue
                         protagonists[i].Sprinting = false;
                         protagonists[i].Speed = 2;
                     }
-
-                    if (ks.IsKeyDown(fireKeys[i]))
-                        protagonists[i].FireProjectile();
                 }
             }
         }
@@ -189,14 +185,21 @@ namespace Rogue
             if (DebugMode)
             {
                 cursor.Draw(spriteBatch);
-                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 340), Color.White);
+                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 430), Color.White);
                 for (int i = 0; i < protagonists.Length; i++)
                 {
-                    spriteBatch.DrawString(consbold, "Player " + (i + 1), new Vector2(7, 5 + (110 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(protagonists[i].Participating), new Vector2(7, 25 + (110 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Sprinting: " + Convert.ToString(protagonists[i].Sprinting), new Vector2(7, 45 + (110 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(protagonists[i].Frame), new Vector2(7, 65 + (110 * i)), Color.White);
-                    spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(protagonists[i].Location), new Vector2(7, 85 + (110 * i)), Color.White);
+                    int j = 110 * i;
+                    spriteBatch.DrawString(consbold, "Player " + (i + 1), new Vector2(7, 5 + j), Color.White);
+                    spriteBatch.DrawString(consnrml, "Participating: " + Convert.ToString(protagonists[i].Participating), new Vector2(7, 25 + j), Color.White);
+                    spriteBatch.DrawString(consnrml, "Sprinting: " + Convert.ToString(protagonists[i].Sprinting), new Vector2(7, 45 + j), Color.White);
+                    spriteBatch.DrawString(consnrml, "Frame: " + Convert.ToString(protagonists[i].Frame), new Vector2(7, 65 + j), Color.White);
+                    spriteBatch.DrawString(consnrml, "Location: " + Convert.ToString(protagonists[i].Location), new Vector2(7, 85 + j), Color.White);
+                    spriteBatch.DrawString(consbold, "Game", new Vector2(7, 335), Color.White);
+                    spriteBatch.DrawString(consnrml, "Cursor: " + Convert.ToString(new Vector2(ms.X, ms.Y)), new Vector2(7, 355), Color.White);
+                    spriteBatch.DrawString(consnrml, "Elapsed: " + (int)gameTime.TotalGameTime.TotalHours + "h, "
+                        + (int)gameTime.TotalGameTime.Minutes + "m, "
+                        + (int)gameTime.TotalGameTime.Seconds + "s", new Vector2(7, 375), Color.White);
+                    spriteBatch.DrawString(consnrml, "Lag: " + Convert.ToString(gameTime.IsRunningSlowly), new Vector2(7, 395), Color.White);
                 }
             }
             spriteBatch.End();

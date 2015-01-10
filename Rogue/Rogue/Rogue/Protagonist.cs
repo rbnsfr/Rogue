@@ -37,7 +37,10 @@ namespace Rogue
             set
             {
                 state = value;
-                this.Frame = 0;
+                this.Frame = 0; /* Commenting this line will make
+                                   the walking animation look more
+                                   natural, but it will cause an
+                                   out-of-index crash after a while. */
 
                 switch (state)
                 {
