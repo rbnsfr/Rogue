@@ -18,7 +18,7 @@ namespace Rogue
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D background, spritesheet, tilesheet, cursortexture, ui;
+        Texture2D background, spritesheet, cursortexture, ui;
         Sprite cursor, projectile;
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
@@ -64,8 +64,8 @@ namespace Rogue
             protagonists[1] = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
             protagonists[2] = new Protagonist(new Vector2(400, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
 
-            cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, 0.4f);
-            projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(228, 9, 15, 15), Vector2.Zero, 1);
+            cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, MathHelper.Pi / 10);
+            projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero, 1);
         }
 
         protected override void UnloadContent()
@@ -146,13 +146,13 @@ namespace Rogue
             if (ks.IsKeyDown(Keys.LeftControl) && ks.IsKeyDown(Keys.LeftShift)
                 && ks.IsKeyDown(Keys.OemTilde)) { /* Checks to see if keys have just been released */ }
             else if (oldks.IsKeyDown(Keys.LeftControl) && oldks.IsKeyDown(Keys.LeftShift)
-                && oldks.IsKeyDown(Keys.OemTilde)) { DebugMode = !DebugMode; }
+                && oldks.IsKeyDown(Keys.OemTilde)) DebugMode = !DebugMode;
             if (ks.IsKeyDown(Keys.D1)) { }
-            else if (oldks.IsKeyDown(Keys.D1)) { protagonists[0].Participating = !protagonists[0].Participating; }
+            else if (oldks.IsKeyDown(Keys.D1)) protagonists[0].Participating = !protagonists[0].Participating;
             if (ks.IsKeyDown(Keys.D2)) { }
-            else if (oldks.IsKeyDown(Keys.D2)) { protagonists[1].Participating = !protagonists[1].Participating; }
+            else if (oldks.IsKeyDown(Keys.D2)) protagonists[1].Participating = !protagonists[1].Participating;
             if (ks.IsKeyDown(Keys.D3)) { }
-            else if (oldks.IsKeyDown(Keys.D3)) { protagonists[2].Participating = !protagonists[2].Participating; }
+            else if (oldks.IsKeyDown(Keys.D3)) protagonists[2].Participating = !protagonists[2].Participating;
 
             oldks = ks;
         }

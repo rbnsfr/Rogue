@@ -17,7 +17,7 @@ namespace Rogue
         private int minX = 52;
         private int maxX = 684;
         private int minY = 50;
-        private int maxY = 446;
+        private int maxY = 484;
 
         public int MinX { get { return minX; } }
         public int MaxX { get { return maxX; } }

@@ -168,12 +168,16 @@ namespace Rogue
                 return false;
         }
 
+        public float RelativeSize
+        {
+            get { return relativeSize; }
+            set { relativeSize = value; }
+        }
+
         public void AddFrame(String animationKey, Rectangle frameRectangle)
         {
             if (!frames.ContainsKey(animationKey))
-            {
                 frames.Add(animationKey, new List<Rectangle>());
-            }
 
             frames[animationKey].Add(frameRectangle);
         }

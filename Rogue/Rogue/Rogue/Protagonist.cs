@@ -16,6 +16,7 @@ namespace Rogue
     class Protagonist : Sprite
     {
         private ProtagonistStates state;
+        private Sprite projectile;
 
         public Protagonist(
             Vector2 location,
@@ -27,7 +28,7 @@ namespace Rogue
             AddFrame("walking", new Rectangle(60, 0, 58, 75));
             AddFrame("walking", new Rectangle(120, 0, 58, 75));
 
-            //this.State = ProtagonistStates.Standing;
+            this.State = ProtagonistStates.Standing;
             this.FrameTime = 0.1f;
         }
 
@@ -58,8 +59,10 @@ namespace Rogue
         private bool participating, sprinting;
         private float speed;
 
-        public void FireProjectile()
+        public void FireProjectile(SpriteBatch spriteBatch, Texture2D texture, Color color)
         {
+            spriteBatch.Draw(texture, this.Location, color);
+            // make projectile move until it hits something
         }
 
         public bool Participating
