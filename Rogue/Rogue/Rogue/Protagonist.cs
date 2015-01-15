@@ -50,21 +50,24 @@ namespace Rogue
             get { return this.state; }
             set
             {
-                state = value;
-                this.Frame = 0; /* Commenting this line will make
-                                   the walking animation look more
-                                   natural, but it will cause an
-                                   out-of-index crash after a while. */
-
-                switch (state)
+                if (state != value)
                 {
-                    case ProtagonistStates.Standing:
-                        this.CurrentAnimation = "default";
-                        break;
+                    state = value;
+                    /* this.Frame = 0; /* Commenting this line will make
+                                       the walking animation look more
+                                       natural, but it will cause an
+                                       out-of-index crash after a while. */
 
-                    case ProtagonistStates.Walking:
-                        this.CurrentAnimation = "walking";
-                        break;
+                    switch (state)
+                    {
+                        case ProtagonistStates.Standing:
+                            this.CurrentAnimation = "default";
+                            break;
+
+                        case ProtagonistStates.Walking:
+                            this.CurrentAnimation = "walking";
+                            break;
+                    }
                 }
             }
         }

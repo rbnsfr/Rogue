@@ -40,9 +40,15 @@ namespace Rogue
             }
             set
             {
-                if (frames.ContainsKey(value))
+                if (CurrentAnimation != value && frames.ContainsKey(value))
                 {
                     currentAnimation = value;
+                    timeForCurrentFrame = 0;
+
+                    if (currentFrame > frames[currentAnimation].Count - 1)
+                    {
+                        currentFrame = 0;
+                    }
                 }
             }
         }

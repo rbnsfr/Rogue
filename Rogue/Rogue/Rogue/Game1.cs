@@ -19,12 +19,12 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, cursortexture, ui, tx;
-        Sprite cursor, projectile, textboxtop, textboxmid, textboxbot;
+        Sprite cursor, projectile, textboxTL, textboxTR, textboxTM, textboxmid, textboxBL, textboxBR, textboxBM;
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
         Boolean DebugMode;
-        Int32 TBHeight, TBWidth;
+        Int32 TBHeight, TBWidth = new Int32();
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
         Protagonist[] protagonists = new Protagonist[3];
@@ -68,9 +68,9 @@ namespace Rogue
 
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, MathHelper.Pi / 10);
             projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero);
-            textboxtop = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(0, 0, 139, 16), Vector2.Zero);
-            textboxmid = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxtop.BoundingBoxRect.Bottom), tx, new Rectangle(0, 17, 139, TBHeight), Vector2.Zero);
-            textboxbot = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(0, 21, 139, 7), Vector2.Zero);
+            textboxTL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(0, 0, 139, 16), Vector2.Zero);
+            textboxmid = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxTL.BoundingBoxRect.Bottom), tx, new Rectangle(0, 17, 139, TBHeight), Vector2.Zero);
+            textboxBL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(0, 21, 139, 7), Vector2.Zero);
         }
 
         protected override void UnloadContent()
@@ -98,7 +98,6 @@ namespace Rogue
 
             for (int i = 0; i < protagonists.Length; i++)
             {
-                protagonists[i].State = ProtagonistStates.Standing;
 
                 if (protagonists[i].Participating)
                 {
@@ -129,7 +128,8 @@ namespace Rogue
                     if (!ks.IsKeyDown(movementKeys[i, 0]) && !ks.IsKeyDown(movementKeys[i, 1])
                         && !ks.IsKeyDown(movementKeys[i, 2]) && !ks.IsKeyDown(movementKeys[i, 3]))
                     {
-                        protagonists[i].Location += new Vector2(0, 0);
+                        protagonists[i].Velocity = Vector2.Zero;
+                        protagonists[i].State = ProtagonistStates.Standing;
                     }
 
                     if (ks.IsKeyDown(sprintKeys[i]))
@@ -140,7 +140,7 @@ namespace Rogue
                     else
                     {
                         protagonists[i].Sprinting = false;
-                        protagonists[i].Velocity = new Vector2(0);
+                        protagonists[i].Velocity = new Vector2(2);
                     }
                 }
             }
