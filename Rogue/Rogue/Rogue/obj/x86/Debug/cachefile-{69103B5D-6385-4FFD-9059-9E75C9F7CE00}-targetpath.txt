@@ -4,4 +4,4 @@ Content\Test\Interface.xnb
 Content\Test\ConsoleBold.xnb
 Content\Test\Console.xnb
 Content\Test\Caverns.xnb
-Content\Test\Textbox.xnb
+Content\Test\TextBox.xnb

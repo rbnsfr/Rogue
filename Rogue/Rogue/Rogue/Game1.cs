@@ -140,7 +140,7 @@ namespace Rogue
                     else
                     {
                         protagonists[i].Sprinting = false;
-                        protagonists[i].Velocity = new Vector2(2);
+                        protagonists[i].Velocity = new Vector2(0);
                     }
                 }
             }
