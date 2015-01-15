@@ -18,12 +18,13 @@ namespace Rogue
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D background, spritesheet, cursortexture, ui;
-        Sprite cursor, projectile;
+        Texture2D background, spritesheet, cursortexture, ui, tx;
+        Sprite cursor, projectile, textboxtop, textboxmid, textboxbot;
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
         Boolean DebugMode;
+        Int32 TBHeight, TBWidth;
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
         Protagonist[] protagonists = new Protagonist[3];
@@ -57,15 +58,19 @@ namespace Rogue
             spritesheet = Content.Load<Texture2D>(@"Test\Spritesheet");
             cursortexture = Content.Load<Texture2D>(@"Test\Cursor");
             ui = Content.Load<Texture2D>(@"Test\Interface");
+            tx = Content.Load<Texture2D>(@"Test\TextBox");
             consbold = Content.Load<SpriteFont>(@"Test\ConsoleBold");
             consnrml = Content.Load<SpriteFont>(@"Test\Console");
 
-            protagonists[0] = new Protagonist(new Vector2(200, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
-            protagonists[1] = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
-            protagonists[2] = new Protagonist(new Vector2(400, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero, 1);
+            protagonists[0] = new Protagonist(new Vector2(200, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero);
+            protagonists[1] = new Protagonist(new Vector2(300, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero);
+            protagonists[2] = new Protagonist(new Vector2(400, 300), spritesheet, new Rectangle(8, 0, 57, 75), Vector2.Zero);
 
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, MathHelper.Pi / 10);
-            projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero, 1);
+            projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero);
+            textboxtop = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(0, 0, 139, 16), Vector2.Zero);
+            textboxmid = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxtop.BoundingBoxRect.Bottom), tx, new Rectangle(0, 17, 139, TBHeight), Vector2.Zero);
+            textboxbot = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(0, 21, 139, 7), Vector2.Zero);
         }
 
         protected override void UnloadContent()
@@ -99,25 +104,25 @@ namespace Rogue
                 {
                     if (ks.IsKeyDown(movementKeys[i, 0]))
                     {
-                        protagonists[i].Location += new Vector2(0, -protagonists[i].Speed);
+                        protagonists[i].Location += new Vector2(0, -protagonists[i].Velocity.Y);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 1]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
-                        protagonists[i].Location += new Vector2(-protagonists[i].Speed, 0);
+                        protagonists[i].Location += new Vector2(-protagonists[i].Velocity.X, 0);
                         protagonists[i].FlipHorizontal = false;
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 2]))
                     {
-                        protagonists[i].Location += new Vector2(0, protagonists[i].Speed);
+                        protagonists[i].Location += new Vector2(0, protagonists[i].Velocity.Y);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 3]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
-                        protagonists[i].Location += new Vector2(protagonists[i].Speed, 0);
+                        protagonists[i].Location += new Vector2(protagonists[i].Velocity.X, 0);
                         protagonists[i].FlipHorizontal = true;
                     }
 
@@ -130,12 +135,12 @@ namespace Rogue
                     if (ks.IsKeyDown(sprintKeys[i]))
                     {
                         protagonists[i].Sprinting = true;
-                        protagonists[i].Speed = 4;
+                        protagonists[i].Velocity = new Vector2(4);
                     }
                     else
                     {
                         protagonists[i].Sprinting = false;
-                        protagonists[i].Speed = 2;
+                        protagonists[i].Velocity = new Vector2(2);
                     }
                 }
             }

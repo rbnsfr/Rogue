@@ -65,6 +65,23 @@ namespace Rogue
             frameHeight = initialFrame.Height;
         }
 
+        public Sprite(
+            Vector2 location,
+            Texture2D texture,
+            Rectangle initialFrame,
+            Vector2 velocity)
+        {
+            this.location = location;
+            Texture = texture;
+            this.velocity = velocity;
+            this.relativeSize = 1;
+
+            frames.Add("default", new List<Rectangle>());
+            frames[currentAnimation].Add(initialFrame);
+            frameWidth = initialFrame.Width;
+            frameHeight = initialFrame.Height;
+        }
+
         public Vector2 Location
         {
             get { return location; }

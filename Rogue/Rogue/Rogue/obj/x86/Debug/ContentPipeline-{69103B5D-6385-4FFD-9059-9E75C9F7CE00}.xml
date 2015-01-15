@@ -11,24 +11,6 @@
       <Time>2015-01-11T19:30:26.723075-05:00</Time>
     </Item>
     <Item>
-      <Source>Test\Tilesheet.png</Source>
-      <Name>Test\Tilesheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Tilesheet.xnb</Output>
-      <Time>2014-12-09T17:45:03.2878995-05:00</Time>
-    </Item>
-    <Item>
-      <Source>Test\Background.png</Source>
-      <Name>Test\Background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Background.xnb</Output>
-      <Time>2014-12-09T17:45:03.2868974-05:00</Time>
-    </Item>
-    <Item>
       <Source>Test\Cursor.png</Source>
       <Name>Test\Cursor</Name>
       <Importer>TextureImporter</Importer>
@@ -72,6 +54,15 @@
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Caverns.xnb</Output>
       <Time>2015-01-09T15:18:24.1169159-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Test\Textbox.png</Source>
+      <Name>Test\Textbox</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Textbox.xnb</Output>
+      <Time>2015-01-13T16:05:50.4484426-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -12,11 +12,18 @@ using Microsoft.Xna.Framework.Media;
 namespace Rogue
 {
     enum ProtagonistStates { Standing, Walking }
-
     class Protagonist : Sprite
     {
         private ProtagonistStates state;
-        private Sprite projectile;
+
+        private void BuildConstructor()
+        {
+            AddFrame("walking", new Rectangle(60, 0, 58, 75));
+            AddFrame("walking", new Rectangle(120, 0, 58, 75));
+
+            this.State = ProtagonistStates.Standing;
+            this.FrameTime = 0.1f;
+        }
 
         public Protagonist(
             Vector2 location,
@@ -25,11 +32,17 @@ namespace Rogue
             Vector2 velocity,
             float relativeSize) : base(location, texture, initialFrame, velocity, relativeSize)
         {
-            AddFrame("walking", new Rectangle(60, 0, 58, 75));
-            AddFrame("walking", new Rectangle(120, 0, 58, 75));
+            BuildConstructor();
+        }
 
-            this.State = ProtagonistStates.Standing;
-            this.FrameTime = 0.1f;
+        public Protagonist(
+            Vector2 location,
+            Texture2D texture,
+            Rectangle initialFrame,
+            Vector2 velocity)
+            : base(location, texture, initialFrame, velocity)
+        {
+            BuildConstructor();
         }
 
         public ProtagonistStates State
@@ -57,7 +70,6 @@ namespace Rogue
         }
 
         private bool participating, sprinting;
-        private float speed;
 
         public void FireProjectile(SpriteBatch spriteBatch, Texture2D texture, Color color)
         {
@@ -75,12 +87,6 @@ namespace Rogue
         {
             get { return sprinting; }
             set { sprinting = value; }
-        }
-
-        public float Speed
-        {
-            get { return speed; }
-            set { speed = value; }
         }
     }
 }
