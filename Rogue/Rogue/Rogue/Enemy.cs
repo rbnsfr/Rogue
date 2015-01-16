@@ -23,7 +23,7 @@ namespace Rogue
         }
 
         private float attackDamage;
-        private bool dead;
+        private bool dead, attacking;
 
         public float AttackDamage
         {
@@ -35,6 +35,12 @@ namespace Rogue
         {
             get { return dead; }
             set { dead = value; }
+        }
+
+        public bool Attacking
+        {
+            get { return attacking; }
+            set { attacking = value; }
         }
     }
 }

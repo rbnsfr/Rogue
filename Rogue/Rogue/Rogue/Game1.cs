@@ -19,11 +19,13 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, cursortexture, ui, tx;
-        Sprite cursor, projectile, textboxTL, textboxTR, textboxTM, textboxmid, textboxBL, textboxBR, textboxBM;
+        Sprite cursor, projectile, textboxTL, textboxTR, textboxTM,
+            textboxmid, textboxBL, textboxBR, textboxBM;
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
         Boolean DebugMode;
+        Vector2 ProtagonistVelocity;
         Int32 TBHeight, TBWidth = new Int32();
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
@@ -68,9 +70,9 @@ namespace Rogue
 
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, MathHelper.Pi / 10);
             projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero);
-            textboxTL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(0, 0, 139, 16), Vector2.Zero);
-            textboxmid = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxTL.BoundingBoxRect.Bottom), tx, new Rectangle(0, 17, 139, TBHeight), Vector2.Zero);
-            textboxBL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(0, 21, 139, 7), Vector2.Zero);
+            textboxTL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(1, 2, 9, 11), Vector2.Zero);
+            textboxTR = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxTL.BoundingBoxRect.Bottom), tx, new Rectangle(13, 2, 9, 11), Vector2.Zero);
+            textboxTM = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(11, 1, 1, 12), Vector2.Zero);
         }
 
         protected override void UnloadContent()
@@ -133,15 +135,9 @@ namespace Rogue
                     }
 
                     if (ks.IsKeyDown(sprintKeys[i]))
-                    {
                         protagonists[i].Sprinting = true;
-                        protagonists[i].Velocity = new Vector2(4);
-                    }
                     else
-                    {
                         protagonists[i].Sprinting = false;
-                        protagonists[i].Velocity = new Vector2(2);
-                    }
                 }
             }
         }

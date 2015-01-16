@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Spritesheet.xnb</Output>
-      <Time>2015-01-15T11:33:10.636-05:00</Time>
+      <Time>2015-01-16T07:30:21.9072-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Cursor.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Cursor.xnb</Output>
-      <Time>2015-01-15T11:33:10.609-05:00</Time>
+      <Time>2015-01-16T07:30:21.8822-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Interface.png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Interface.xnb</Output>
-      <Time>2015-01-15T11:33:10.633-05:00</Time>
+      <Time>2015-01-16T07:30:21.9042-05:00</Time>
     </Item>
     <Item>
       <Source>Test\ConsoleBold.spritefont</Source>
@@ -35,7 +35,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\ConsoleBold.xnb</Output>
-      <Time>2015-01-15T11:33:10.606-05:00</Time>
+      <Time>2015-01-16T07:30:21.8792-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Console.spritefont</Source>
@@ -44,7 +44,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Console.xnb</Output>
-      <Time>2015-01-15T11:33:10.603-05:00</Time>
+      <Time>2015-01-16T07:30:21.8762-05:00</Time>
     </Item>
     <Item>
       <Source>Test\Caverns.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\Caverns.xnb</Output>
-      <Time>2015-01-15T11:33:10.6-05:00</Time>
+      <Time>2015-01-16T07:30:21.8752-05:00</Time>
     </Item>
     <Item>
       <Source>Test\TextBox.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\Test\TextBox.xnb</Output>
-      <Time>2015-01-15T11:33:10.637-05:00</Time>
+      <Time>2015-01-16T07:30:21.9092-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -70,10 +70,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\EAHSCS\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Eahscs\Documents\GitHub\Rogue\Rogue\Rogue\RogueContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Eahscs\Documents\GitHub\Rogue\Rogue\Rogue\Rogue\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
