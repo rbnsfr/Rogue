@@ -19,13 +19,11 @@ namespace Rogue
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D background, spritesheet, cursortexture, ui, tx;
-        Sprite cursor, projectile, textboxTL, textboxTR, textboxTM,
-            textboxmid, textboxBL, textboxBR, textboxBM;
+        Sprite cursor, projectile;
         SpriteFont consbold, consnrml;
         KeyboardState oldks, ks;
         MouseState ms;
         Boolean DebugMode;
-        Vector2 ProtagonistVelocity;
         Int32 TBHeight, TBWidth = new Int32();
         RandomManager mgrRandom = new RandomManager();
         BoundaryManager mgrBoundary = new BoundaryManager();
@@ -70,9 +68,6 @@ namespace Rogue
 
             cursor = new Sprite(Vector2.Zero, cursortexture, new Rectangle(0, 0, 50, 50), Vector2.Zero, MathHelper.Pi / 10);
             projectile = new Sprite(Vector2.Zero, spritesheet, new Rectangle(218, 7, 20, 20), Vector2.Zero);
-            textboxTL = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), tx, new Rectangle(1, 2, 9, 11), Vector2.Zero);
-            textboxTR = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxTL.BoundingBoxRect.Bottom), tx, new Rectangle(13, 2, 9, 11), Vector2.Zero);
-            textboxTM = new Sprite(new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y + textboxmid.BoundingBoxRect.Bottom), tx, new Rectangle(11, 1, 1, 12), Vector2.Zero);
         }
 
         protected override void UnloadContent()
@@ -98,31 +93,45 @@ namespace Rogue
         {
             ks = Keyboard.GetState();
 
-            for (int i = 0; i < protagonists.Length; i++)
+            for (int i = 0, vel; i < protagonists.Length; i++)
             {
+                if (ks.IsKeyDown(sprintKeys[i]))
+                {
+                    protagonists[i].Sprinting = true;
+                    vel = 4;
+                }
+                else
+                {
+                    protagonists[i].Sprinting = false;
+                    vel = 2;
+                }
 
                 if (protagonists[i].Participating)
                 {
                     if (ks.IsKeyDown(movementKeys[i, 0]))
                     {
+                        protagonists[i].Velocity = new Vector2(0, vel);
                         protagonists[i].Location += new Vector2(0, -protagonists[i].Velocity.Y);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 1]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
+                        protagonists[i].Velocity = new Vector2(vel, 0);
                         protagonists[i].Location += new Vector2(-protagonists[i].Velocity.X, 0);
                         protagonists[i].FlipHorizontal = false;
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 2]))
                     {
+                        protagonists[i].Velocity = new Vector2(0, vel);
                         protagonists[i].Location += new Vector2(0, protagonists[i].Velocity.Y);
                     }
 
                     if (ks.IsKeyDown(movementKeys[i, 3]))
                     {
                         protagonists[i].State = ProtagonistStates.Walking;
+                        protagonists[i].Velocity = new Vector2(vel, 0);
                         protagonists[i].Location += new Vector2(protagonists[i].Velocity.X, 0);
                         protagonists[i].FlipHorizontal = true;
                     }
@@ -133,11 +142,6 @@ namespace Rogue
                         protagonists[i].Velocity = Vector2.Zero;
                         protagonists[i].State = ProtagonistStates.Standing;
                     }
-
-                    if (ks.IsKeyDown(sprintKeys[i]))
-                        protagonists[i].Sprinting = true;
-                    else
-                        protagonists[i].Sprinting = false;
                 }
             }
         }
@@ -186,7 +190,7 @@ namespace Rogue
             if (DebugMode)
             {
                 cursor.Draw(spriteBatch);
-                spriteBatch.Draw(ui, new Rectangle(0, 0, 225, 430), Color.White);
+                spriteBatch.Draw(ui, new Rectangle(0, 0, 310, 430), Color.White);
                 for (int i = 0; i < protagonists.Length; i++)
                 {
                     int j = 110 * i;
